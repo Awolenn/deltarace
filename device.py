@@ -166,7 +166,7 @@ while not window_should_close():
     elif fun.currentScreen == 3:
         fun.clearText(RAYWHITE)
         draw_texture_ex(creditsImage, [110, 0], 0, .5, WHITE)
-        draw_text_ex(sansFont, "also thanks to:\ndeltarune dev team (made this possible, music, sounds, assets, etc.)\nzaikawo (helped me program)\nraylib dev team (i'm using it)\npython raylib bindings devs (i'm also using it)", [5, 0], fun.standardFontSize*1, 1, BLACK)
+        draw_text_ex(sansFont, "also thanks to:\ndeltarune dev team (made this possible, music, sounds, assets, etc.)\nzaikawo (helped me program)\nraylib dev team (i'm using it)\npython raylib bindings devs (i'm also using it)\n@JapanYoshi on behance.net (this awesome font)", [5, 0], fun.standardFontSize*1, 1, BLACK)
         if fun.isCursorInCard(150, 210, 150+260, 210+270):
             draw_text_ex(sansFont, "SAM", [240, 140], fun.standardFontSize*4, 1, BLACK)
             draw_text_ex(sansFont, "he/they/neos\nalso known as reaper or awolen\nguy who made this.\nprogrammer, gave some ideas for\nbingo cards but not a lot.", [150, 480], fun.standardFontSize*1, 1, BLACK)
