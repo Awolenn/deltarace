@@ -10,6 +10,7 @@ malachy = []
 # --- VARIABLES END --- #
 
 # --- FUNCTIONS START --- #
+
 def easyChoice():
     """Selects a random integer that can be carded in the easyNames list.
 
@@ -95,9 +96,5 @@ def okMikeCanYouDescribeItForMe(card):
         return "FREE SPACE"
     else:
         return vessel.easyDesc[malachy[card]]
+
 # --- FUNCTIONS END --- #
-print(mikeTheBoard(1))
-print(okMikeCanYouDescribeItForMe(1))
-print(mikeTheBoard(4))
-print(okMikeCanYouDescribeItForMe(4))
-print(malachy)
