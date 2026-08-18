@@ -9,12 +9,12 @@ import vessel
 windowWidth = 900
 windowHeight = 700
 # WINDOW SIZES ^^^ vvv CARD SIZES
-cardSize = 100
+cardSize = 114
 cardMargin = 5
 fullCard = cardSize + cardMargin
 # CARD SIZES ^^^ vvv CREDIT SIZES
-creditsLeft = 15
-creditsUp = 470
+creditsLeft = 700
+creditsUp = 640
 creditsWidth = 195
 creditsHeight = 50
 standardFontSize = 16
@@ -30,7 +30,7 @@ cardText = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", 
 # --- CONSTANTS END --- #
 
 # --- INITIAL VARIABLES START --- #
-currentScreen = 1 # RESET TO ZERO ONCE YOU'RE DONE TESTING!
+currentScreen = 2 # RESET TO ZERO ONCE YOU'RE DONE TESTING!
 framesCounter = 0
 messageCount = 0
 opacity = 0
@@ -43,6 +43,7 @@ visitedEggRoom = False # RESET TO FALSE ONCE YOU'RE DONE TESTING!
 # --- INITIAL VARIABLES END --- #
 
 # --- FUNCTIONS START --- #
+
 def dialoguePartOne(dialogue):
     """Allows proceeding through dialogue.
     
@@ -86,8 +87,8 @@ def dialoguePartTwo(font, dialogue, x, y, width, height, size, spacing, color):
     """
     textSize = measure_text_ex(font, dialogue[messageCount], standardFontSize*size, spacing)
     textPos = [
-        x + lerp(0, width - textSize.x, .5),
-        y + lerp(0, height - textSize.y, .5)
+        x + lerp(0, width/2 - textSize.x/2, .5),
+        y + lerp(0, height/2 - textSize.y/2, .5)
     ]
     draw_text_ex(font, text_subtext(dialogue[messageCount], 0, framesCounter), textPos, standardFontSize*size, spacing, color)
 
@@ -107,7 +108,6 @@ def dialoguePartThree(font, dialogue, x, y, size, spacing, color):
     """
     draw_text_ex(font, text_subtext(dialogue[messageCount], 0, framesCounter), [x, y], standardFontSize*size, spacing, color)
 
-
 def clearText(color):
     """Clear text from the screen.
     
@@ -124,7 +124,7 @@ def leftLimit(col):
     Args:
         col (int): The column the card is in.
     """
-    return fullCard*(col-1)+320
+    return fullCard*(col-1)+300
 
 def upLimit(row):
     """Define the upper limit of the card.
@@ -181,6 +181,52 @@ def isCursorInCard(leftLimit, upLimit, rightLimit, downLimit):
 
 # CARD INTERACTION CHECKS ^^^ vvv CARD CREATION
 
+def drawWrappedCardText(card, font, col, row):
+    """Draws wrapped text. This one uses the dimensions and positions for cards.
+
+    Args:
+        card (int): The unique number of the card.
+        font (raylib.font): The font you want the card text to be displayed as.
+        col (int): The column of the card.
+        row (int): The row of the card.
+    """
+    spaceRemaining = 14
+    newTextLineCount = 0
+    newText = []
+
+    for word in goner.mikeTheBoard(card).split(" "):
+        if len(word) > spaceRemaining:
+            newText.append("\n" + word)
+            newTextLineCount += 1
+            spaceRemaining = 14 - len(word)
+        else:
+            newText.append(word)
+            spaceRemaining = spaceRemaining - (len(word))
+    brandSpankingNewText = " ".join(newText)
+    draw_text_ex(font, brandSpankingNewText, [leftLimit(col)+2, upLimit(row)], standardFontSize*1, 0, WHITE)
+
+def drawWrappedTooltipText(card, font):
+    """Draws wrapped text. This one uses the dimensions and positions for tooltips.
+
+    Args:
+        card (int): The unique number of the card.
+        font (raylib.font): The font you want the card text to be displayed as.
+    """
+    spaceRemaining = 26
+    newTextLineCount = 0
+    newText = []
+
+    for word in goner.okMikeCanYouDescribeItForMe(card).split(" "):
+        if len(word) > spaceRemaining:
+            newText.append("\n" + word)
+            newTextLineCount += 1
+            spaceRemaining = 26 - len(word)
+        else:
+            newText.append(word)
+            spaceRemaining = spaceRemaining - (len(word))
+    brandSpankingNewText = " ".join(newText)
+    draw_text_ex(font, brandSpankingNewText, [5, 5], standardFontSize*1, 0, WHITE)
+
 def makeCardPartOne(col, row, card):
     """Makes the cards capable of being marked and showing tooltips when hovered over.
 
@@ -212,21 +258,23 @@ def makeCardPartOne(col, row, card):
     elif not isCursorInCard(*allLimits(col, row)):
         squaresHovered[card] = False
 
-def makeCardPartTwo(col, row, card):
+def makeCardPartTwo(col, row, card, font, font2):
     """Draws the cards to the screen, along with the tooltip text.
 
-    makeCardPartOne should be included outside the "drawing" portion of the code if this is present to ensure full functionality, but I'm not your dad.
+    makeCardPartOne should be included outside the "drawing" portion of the code if this is present to ensure full functionality, but I'm not your dad. Also, I don't actually know if it's raylib.font.
 
     Args:
         col (int): The column of the card.
         row (int): The row of the card.
         card (int): The unique number of the card.
+        font (raylib.font): The font you want the card text to be displayed as.
+        font2 (raylib.font): The font you want the tooltip text to be displayed as.
     """
     draw_rectangle(leftLimit(col), upLimit(row), cardSize, cardSize, squareColor[card]) # draw the card itself. the color is a variable so it can be modified when marked.
-    draw_text(goner.mikeTheBoard(card), leftLimit(col)+5, upLimit(row)+5, 15, BLUE) # draw the text on top of the card.
+    drawWrappedCardText(card, font, col, row) # draw the text on top of the card.
     # this took me forever for literally no reason but it supplies tool tips now. so. yay!
     if isCursorInCard(*allLimits(col, row)):
-        draw_text(goner.okMikeCanYouDescribeItForMe(card), 0, 530, 15, BLUE)
+        drawWrappedTooltipText(card, font2)
 
 # CARD CREATION ^^^ vvv BUTTON CREATION
 

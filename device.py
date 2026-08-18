@@ -7,6 +7,7 @@ import gonermaker
 
 # --- WINDOW START --- #
 init_window(fun.windowWidth, fun.windowHeight, "CONNECTION ESTABLISHED .")
+set_trace_log_level(4)
 monoFont = load_font("DTM-Mono.otf")
 sansFont = load_font("DTM-Sans.otf")
 while not window_should_close():
@@ -54,7 +55,10 @@ while not window_should_close():
     elif fun.currentScreen == 4:
         set_window_title(" ")
         set_target_fps(20)
-        fun.dialoguePartOne(fun.forgottenMessages, 2)
+        fun.dialoguePartOne(fun.forgottenMessages)
+        if fun.messageCount == len(fun.gasterMessages)-1:
+            fun.messageCount = 0
+            fun.currentScreen = 2
 
     # --- DRAWING START --- #
     begin_drawing()
@@ -75,16 +79,16 @@ while not window_should_close():
         # buffer clearing... oh i sound so smart saying buffer.
         clear_background(RAYWHITE)
         # this is the fun aesthetic stuff, really. i guess none of it is required, but it's nice. it gets rendered before the cards because. i said so.
-        draw_rectangle(0, 0, 230, fun.windowHeight, GRAY)
-        draw_text("SADIE AND SAM'S\nSUPER SAUCY\nBLINGO BLIZZARD!", 15, 15, 20, GREEN)
-        draw_text("help help help help\nthis is lots of helpful\ninformation about this\nprogram", 15, 80, 15, GREEN)
-        draw_rectangle(0, 530, fun.windowWidth, 170, BLACK)
+        draw_rectangle(0, 600, fun.windowWidth, 100, GRAY)
+        draw_text_ex(sansFont, "SADIE AND SAM'S SUPER SAUCY BLINGO BLIZZARD!", [290, 600], fun.standardFontSize*2, 1, GREEN)
+        draw_text_ex(sansFont, "you only win the race if you beat all chapters and secret bosses\nAND fill outa bingo! for the easiest time verifying your bingo,\nstream your playthrough! hover over a card for details.", [290, 630], fun.standardFontSize*1, 0, GREEN)
+        draw_rectangle(0, 0, 280, fun.windowHeight, BLACK)
         if fun.visitedEggRoom:
             draw_circle(70, 70, 5, MAROON)
         # drawing the cards. might change a little for aesthetic purposes but holy fuck i don't want to do that lol.
         for col in range(1, 6):
             for row in range(1, 6):
-                fun.makeCardPartTwo(row, col, ((row-1)+(col-1)*5))
+                fun.makeCardPartTwo(row, col, ((row-1)+(col-1)*5), sansFont, monoFont)
         fun.makeCreditsPartTwo(sansFont)
     
     # SCREEN 3 ; CREDITS
