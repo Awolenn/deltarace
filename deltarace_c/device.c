@@ -3,7 +3,7 @@
 #include "time.h"
 
 // files
-#include "fun.c"
+#include "funvalues.c"
 
 #define ASSET "DONOTENTERPLEASE/"
 
@@ -13,10 +13,10 @@ int main() {
   InitAudioDevice();
   SetTraceLogLevel(4); // preventing log spam
 
-  // copy board to lucio since lucio isnt assignable
+  // copy board to malachy since malachy isnt assignable
   int* board = finalChoice();
   if (board) {
-    memcpy(lucio, board, 25 * sizeof(int));
+    memcpy(malachy, board, 25 * sizeof(int));
     free(board);
   }
 
@@ -160,7 +160,6 @@ int main() {
     }
 
     BeginDrawing();
-    printf("%d", currentScreen);
     if (currentScreen == 0) {
       ClearBackground(BLACK);
       Vector2 depthsPos = {

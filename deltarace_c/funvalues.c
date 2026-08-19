@@ -2,7 +2,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
-#include "goner.c"
+#include "gonermaker.c"
 
 // window sizes
 const int windowWidth = 900;

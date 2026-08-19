@@ -9,7 +9,8 @@
 // even if I must repeat the same stance a thousand—no,
 //  ten thousand—times over… if I am to be a perfectly
 //           tailored textbook for you. ]
-int lucio[25] = {
+// [ YES, HE SCRAWLS HIS NAME IN THE MARGINS OF HIS NOTES. HE NAMES PROGRAMMING VARIABLES AFTER HIM. ]
+int malachy[25] = {
   -1, -1, -1, -1, -1,
   -1, -1, -1, -1, -1,
   -1, -1, -1, -1, -1,
@@ -125,26 +126,26 @@ int* finalChoice() {
   return board;
 }
 
-// malac i mean lucio is gonna be assigned in main because you cant
+// malac i mean lucio (not anymore dipshit - awo) is gonna be assigned in main because you cant
 // make global variables be non compile time constants but its just gonna be
 // the same thing
 
 const char* mikeTheBoard(int card) {
   if (card == 4 || card == 6 || card == 10 || card == 18 || card == 22) {
-    return hardNames[lucio[card]];
+    return hardNames[malachy[card]];
   } else if (card == 12) {
     return "FREE SPACE";
   } else {
-    return easyNames[lucio[card]];
+    return easyNames[malachy[card]];
   }
 }
 
 const char* okMikeCanYouDescribeItForMe(int card) {
   if (card == 4 || card == 6 || card == 10 || card == 18 || card == 22) {
-    return hardDesc[lucio[card]];
+    return hardDesc[malachy[card]];
   } else if (card == 12) {
     return "FREE SPACE";
   } else {
-    return easyDesc[lucio[card]];
+    return easyDesc[malachy[card]];
   }
 }
