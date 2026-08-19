@@ -4,3 +4,6 @@ build/
 dist/
 *.manifest
 *.spec
+
+deltarace_linux/
+deltarace_windows/
