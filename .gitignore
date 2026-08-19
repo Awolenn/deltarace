@@ -1,9 +1,21 @@
+# --- PYTHON START --- #
 __pycache__/
 
+# pyinstaller specific when i was messing with it...
 build/
 dist/
 *.manifest
 *.spec
+# --- PYTHON END --- #
 
+# --- C START --- #
+# when i build, it ends up in the project folder and i don't want it in the github archives
+deltarace
+deltarace.exe
+# --- C END --- #
+
+# --- EXTRAS START --- #
+# i usually make the binaries in the project folder... probably bad practice but whatever
 deltarace_linux/
 deltarace_windows/
+# --- EXTRAS END --- #
