@@ -182,7 +182,7 @@ const char* hardNames[] = {
 
   // CHAPTER ONE
   "You have to defeat both Jevil and King via violence with only Ralsei",
-  "No-hit King. If you take damage, reload",
+  "No-hit King", //28
 
   // CHAPTER THREE
   "Get a T Rank (any board)", 
@@ -384,7 +384,7 @@ const char* hardDesc[] = {
 
   // CHAPTER ONE
   "Attacking with Susie and Kris is completely banned. You must record both fights for this to count.",
-  "You must no-hit the King fight, and if you take damage, you must reload immediately. You must record the King fight for this to count.",
+  "You must no-hit the King fight, and if you take damage, you must reload immediately. You must record the King fight for this to count.", //28
 
   // CHAPTER THREE
   "During any board in Chapter 3, you must get a T-Rank as your final result. You must take a screenshot of your results screen to prove this one.", 

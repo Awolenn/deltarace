@@ -13,6 +13,11 @@ const int cardSize = 114;
 const int cardMargin = 5;
 const int fullCard = cardSize + cardMargin;
 
+// card colors
+const Color blueGray = { 218, 222, 230, 255 };
+const Color darkBlue = { 11, 14, 20, 255 };
+const Color deeperBlueGray = { 27, 31, 36, 255 };
+
 // credit sizes
 const int creditsLeft = 700;
 const int creditsUp = 640;
@@ -82,11 +87,11 @@ bool squaresHovered[] = {
 };
 
 Color squareColor[] = {
-  BLACK, BLACK, BLACK, BLACK, BLACK,
-  BLACK, BLACK, BLACK, BLACK, BLACK,
-  BLACK, BLACK, BLACK, BLACK, BLACK,
-  BLACK, BLACK, BLACK, BLACK, BLACK,
-  BLACK, BLACK, BLACK, BLACK, BLACK
+  blueGray, blueGray, blueGray, blueGray, blueGray,
+  blueGray, blueGray, blueGray, blueGray, blueGray,
+  blueGray, blueGray, blueGray, blueGray, blueGray,
+  blueGray, blueGray, blueGray, blueGray, blueGray,
+  blueGray, blueGray, blueGray, blueGray, blueGray
 };
 
 const char* cardText[] = {
@@ -160,7 +165,7 @@ void dialoguePartThree(
   char* dialogue[],
   int x,
   int y,
-  int size,
+  float size,
   int spacing,
   Color color
 ) {
@@ -302,7 +307,7 @@ strcat(brandSpankingNewText, word);
     (float)(leftLimit(col) + 2),
     (float)upLimit(row)
   };
-  DrawTextEx(font, brandSpankingNewText, pos, standardFontSize, 0, WHITE);
+  DrawTextEx(font, brandSpankingNewText, pos, standardFontSize, 0, darkBlue);
   // free the buffer
   free(brandSpankingNewText);
 }
@@ -362,7 +367,7 @@ void drawWrappedTooltipText(
     5.0f,
     5.0f
   };
-  DrawTextEx(font, brandSpankingNewText, pos, standardFontSize, 0, WHITE);
+  DrawTextEx(font, brandSpankingNewText, pos, standardFontSize, 0, blueGray);
   free(brandSpankingNewText);
 }
 
@@ -380,7 +385,7 @@ if (isClickingCard(allLimits(col, row))) {
       squareColor[card] = RED;
       squaresMarked[card] = true;
     } else if (squaresMarked[card]) {
-      squareColor[card] = BLACK;
+      squareColor[card] = blueGray;
       squaresMarked[card] = false;
     }
   }
@@ -515,47 +520,46 @@ void makeCreditsPartOne(
   };
 
   CardLimits eggLimits = {
-    865,
+    15,
     660,
-    865+20,
-    660+20
+    15+24,
+    660+28
   };
 
+  if (isClickingCard(eggLimits)) {
+    PlaySound(eggNoise);
+  }
   if (isClickingCard(creditsLimits)) {
-    if (isClickingCard(eggLimits)) {
-      PlaySound(eggNoise);
-    } else {
-      SetSoundVolume(sound, 0.4f);
-      PlaySound(sound);
-      if (!inCredits) {
-        if (!visitedEggRoom) {
-          int inbetween = randint(50, 100);
-          if (inbetween == 66) {
-            currentScreen = 66;
-            visitedEggRoom = true;
-          } else {
-            currentScreen = 3;
-            inCredits = true;
-          }
+    SetSoundVolume(sound, 0.4f);
+    PlaySound(sound);
+    if (!inCredits) {
+      if (!visitedEggRoom) {
+        int inbetween = randint(50, 100);
+        if (inbetween == 66) {
+          currentScreen = 66;
+          visitedEggRoom = true;
         } else {
           currentScreen = 3;
           inCredits = true;
         }
       } else {
-        if (!visitedEggRoom) {
-          int inbetween = randint(50, 100);
-          if (inbetween == 66) {
-            currentScreen = 66;
+        currentScreen = 3;
+        inCredits = true;
+      }
+    } else {
+      if (!visitedEggRoom) {
+        int inbetween = randint(50, 100);
+        if (inbetween == 66) {
+          currentScreen = 66;
             visitedEggRoom = true;
-            inCredits = false;
-          } else {
-            currentScreen = 2;
-            inCredits = false;
-          }
+          inCredits = false;
         } else {
           currentScreen = 2;
           inCredits = false;
         }
+      } else {
+        currentScreen = 2;
+        inCredits = false;
       }
     }
   }
@@ -565,7 +569,8 @@ void makeCreditsPartTwo(
   Font font,
   Texture2D image
 ) {
-  DrawRectangle(creditsLeft, creditsUp, creditsLeft+creditsWidth, creditsUp+creditsHeight, GREEN);
+  DrawRectangle(creditsLeft-2, creditsUp-2, creditsWidth+4, creditsHeight+4, deeperBlueGray);
+  DrawRectangle(creditsLeft, creditsUp, creditsWidth, creditsHeight, blueGray);
   if (!inCredits) {
     Vector2 textLoc = {
       creditsLeft + 25,
@@ -580,7 +585,7 @@ void makeCreditsPartTwo(
     DrawTextEx(font, "BACK", textLoc, standardFontSize*3, 0, BLACK);
   }
   if (visitedEggRoom) {
-    DrawTexture(image, 865, 660, WHITE);
+    DrawTexture(image, 15, 660, WHITE);
   }
 }
 

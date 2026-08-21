@@ -123,21 +123,19 @@ int main() {
       StopSound(w);
       StopSound(man);
       SetTargetFPS(60);
-      // T HIS DOES LITERALLY NOTIHING
-      for (int cardCounter = 0; cardCounter < 25; cardCounter++) {
+      // T HIS DOES LITERALLY NOTIHING (i changed it lol - awo)
         for (int col = 1; col < 6; col++) {
           for (int row = 1; row < 6; row++) {
             makeCardPartOne(row, col, clickSound, ((row-1)+(col-1)*5));
           }
         }
-      }
       makeCreditsPartOne(clickSound, eggSound);
       possibleBingoWinCheck(winSound);
     }
     // the python doesnt have the else infront of the if and thus makes it
     // so that it instantly goes into the credits while the function is
     // checking if it IS in the credits to bring it back
-    // i.e it instantly went in and out of credits
+    // i.e it instantly went in and out of credits (now it do - awo)
     else if (currentScreen == 3) {
       SetWindowTitle("SADIE AND SAM'S SUPER SAUCY CREDITS!");
       SetTargetFPS(60);
@@ -189,18 +187,18 @@ int main() {
     }
 
     else if (currentScreen == 2) {
-      ClearBackground(WHITE);
-      DrawRectangle(0, 600, windowWidth, 100, GRAY);
+      ClearBackground(deeperBlueGray);
+      DrawRectangle(0, 600, windowWidth, 100, darkBlue);
       Vector2 blingoPos = {
         290,
         600
       };
-      DrawTextEx(sansFont, "SADIE AND SAM'S SUPER SAUCY BLINGO BLIZZARD!", blingoPos, standardFontSize*2, 1, GREEN);
+      DrawTextEx(sansFont, "SADIE AND SAM'S SUPER SAUCY BLINGO BLIZZARD!", blingoPos, standardFontSize*2, 1, BLUE);
       Vector2 descPos = {
         290,
         630
       };
-      DrawTextEx(sansFont, "you only win the race if you beat all chapters and secret bosses\nAND fill outa bingo! for the easiest time verifying your bingo,\nstream your playthrough! hover over a card for details.", descPos, standardFontSize*1, 0, GREEN);
+      DrawTextEx(sansFont, "you only win the race if you beat all chapters and secret bosses\nAND fill outa bingo! for the easiest time verifying your bingo,\nstream your playthrough! hover over a card for details.", descPos, standardFontSize*1, 0, BLUE);
       DrawRectangle(0, 0, 280, windowHeight, BLACK);
       for (int col = 1; col < 6; col++) {
         for (int row = 1; row < 6; row++) {
