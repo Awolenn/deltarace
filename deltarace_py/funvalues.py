@@ -12,7 +12,11 @@ windowHeight = 700
 cardSize = 114
 cardMargin = 5
 fullCard = cardSize + cardMargin
-# CARD SIZES ^^^ vvv CREDIT SIZES
+# CARD SIZES ^^^ vvv CARD COLORS
+blueGray = ( 218, 222, 230, 255 )
+darkBlue = ( 11, 14, 20, 255 )
+deeperBlueGray = ( 27, 31, 36, 255 )
+# CARD COLORS ^^^ vvv CREDIT SIZES
 creditsLeft = 700
 creditsUp = 640
 creditsWidth = 195
@@ -31,12 +35,16 @@ squaresMarked = [False, False, False, False, False, #0-4
                  False, False, False, False, False, #15-19
                  False, False, False, False, False] #20-24
 squaresHovered = [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]
-squareColor = [BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK]
+squareColor = [blueGray, blueGray, blueGray, blueGray, blueGray, #0-4
+               blueGray, blueGray, blueGray, blueGray, blueGray, #5-9
+               blueGray, blueGray, blueGray, blueGray, blueGray, #10-14
+               blueGray, blueGray, blueGray, blueGray, blueGray, #15-19
+               blueGray, blueGray, blueGray, blueGray, blueGray] #20-24
 cardText = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"]
 # --- CONSTANTS END --- #
 
 # --- INITIAL VARIABLES START --- #
-currentScreen = 0 # RESET TO ZERO ONCE YOU'RE DONE TESTING!
+currentScreen = 2 # RESET TO ZERO ONCE YOU'RE DONE TESTING!
 framesCounter = 0
 messageCount = 0
 opacity = 0
@@ -49,7 +57,7 @@ cardPartTwoCounter = 0
 win = False
 # BINGO STUFF ^^^ vvv CREDITS STUFF
 inCredits = False
-visitedEggRoom = False # RESET TO FALSE ONCE YOU'RE DONE TESTING!
+visitedEggRoom = True # RESET TO FALSE ONCE YOU'RE DONE TESTING!
 # CREDITS STUFF ^^^ vvv EGG ROOM STUFF
 framesCounterForAnimation = 0
 currentAnimationFrame = 0
@@ -216,7 +224,7 @@ def drawWrappedCardText(card, font, col, row):
             newText.append(word)
             spaceRemaining = spaceRemaining - (len(word))
     brandSpankingNewText = " ".join(newText)
-    draw_text_ex(font, brandSpankingNewText, [leftLimit(col)+2, upLimit(row)], standardFontSize*1, 0, WHITE)
+    draw_text_ex(font, brandSpankingNewText, [leftLimit(col)+2, upLimit(row)], standardFontSize*1, 0, darkBlue)
 
 def drawWrappedTooltipText(card, font):
     """Draws wrapped text. This one uses the dimensions and positions for tooltips.
@@ -238,7 +246,7 @@ def drawWrappedTooltipText(card, font):
             newText.append(word)
             spaceRemaining = spaceRemaining - (len(word))
     brandSpankingNewText = " ".join(newText)
-    draw_text_ex(font, brandSpankingNewText, [5, 5], standardFontSize*1, 0, WHITE)
+    draw_text_ex(font, brandSpankingNewText, [5, 5], standardFontSize*1, 0, blueGray)
 
 def makeCardPartOne(col, row, sound, card):
     """Makes the cards capable of being marked and showing tooltips when hovered over.
@@ -263,7 +271,7 @@ def makeCardPartOne(col, row, sound, card):
 
         # if square is marked, unmark it.
         elif squaresMarked[card]:
-            squareColor[card] = BLACK
+            squareColor[card] = blueGray
             squaresMarked[card] = False
 
     # if cursor is in card, you're hovering over it.
@@ -396,42 +404,41 @@ def makeCreditsPartOne(sound, eggNoise):
     """
     # check if a card is being clicked to begin with, and if so, what card specficially. 
     # the card should be inside of the limits. if it isn't. that's bad.
+    if isClickingCard(15, 660, 15+24, 660+28):
+        play_sound(eggNoise)
     if isClickingCard(creditsLeft, creditsUp, creditsLeft+creditsWidth, creditsUp+creditsHeight):
-        if isClickingCard(865, 660, 865+25, 660+30):
-                play_sound(eggNoise)
-        else:
-            set_sound_volume(sound, .4)
-            play_sound(sound)
-            if not inCredits: # if you're on screen 2, really... or screen 4
-                if not visitedEggRoom: # if you haven't gotten the "Egg"
-                    inbetween = random.randint(50, 100)
-                    if inbetween == 66:
-                        currentScreen = 66
-                        visitedEggRoom = True
+        set_sound_volume(sound, .4)
+        play_sound(sound)
+        if not inCredits: # if you're on screen 2, really... or screen 4
+            if not visitedEggRoom: # if you haven't gotten the "Egg"
+                inbetween = random.randint(50, 100)
+                if inbetween == 66:
+                    currentScreen = 66
+                    visitedEggRoom = True
 
-                    else: # if you aren't lucky, you go to credits.
-                        currentScreen = 3
-                        inCredits = True
-
-                else: # if you've visited the forgotten man, skip the check.
+                else: # if you aren't lucky, you go to credits.
                     currentScreen = 3
                     inCredits = True
 
-            elif inCredits: # if you're on screen 3m really...
-                if not visitedEggRoom: # if you haven't gotten the "Egg"
-                    inbetween = random.randint(50, 100)
-                    if inbetween == 66:
-                        currentScreen = 66
-                        visitedEggRoom = True
-                        inCredits = False
+            else: # if you've visited the forgotten man, skip the check.
+                currentScreen = 3
+                inCredits = True
 
-                    else: # if you aren't lucky, you go to bingo again.
-                        currentScreen = 2
-                        inCredits = False
+        elif inCredits: # if you're on screen 3m really...
+            if not visitedEggRoom: # if you haven't gotten the "Egg"
+                inbetween = random.randint(50, 100)
+                if inbetween == 66:
+                    currentScreen = 66
+                    visitedEggRoom = True
+                    inCredits = False
 
-                else: # if you've visited the forgotten man, skip the check.
+                else: # if you aren't lucky, you go to bingo again.
                     currentScreen = 2
                     inCredits = False
+
+            else: # if you've visited the forgotten man, skip the check.
+                currentScreen = 2
+                inCredits = False
 
 def makeCreditsPartTwo(font, image):
     """Draws the credits button to the screen.
@@ -442,13 +449,14 @@ def makeCreditsPartTwo(font, image):
         font (raylib.font): The font you want the text to be displayed as.
         image (raylib.texture): The image you want to use for the "Egg".
     """
-    draw_rectangle(creditsLeft, creditsUp, creditsWidth, creditsHeight, GREEN) # draw the card itself. the color is a variable so it can be modified when marked.
+    draw_rectangle(creditsLeft-2, creditsUp-2, creditsWidth+4, creditsHeight+4, deeperBlueGray) # draw a card outline.
+    draw_rectangle(creditsLeft, creditsUp, creditsWidth, creditsHeight, blueGray) # draw the card itself. the color is a variable so it can be modified when marked.
     if not inCredits:
         draw_text_ex(font, "CREDITS", [creditsLeft+25, creditsUp], standardFontSize*3, 0, BLACK)
+        if visitedEggRoom:
+            draw_texture(image, 15, 660, WHITE)
     elif inCredits:
         draw_text_ex(font, "BACK", [creditsLeft+55, creditsUp], standardFontSize*3, 0, BLACK)
-    if visitedEggRoom:
-            draw_texture(image, 865, 660, WHITE)
 
 # BUTTON CREATION ^^^ vvv EGG ROOM
 

@@ -104,7 +104,7 @@ const char* cardText[] = {
 
 // initial variables start
 // dialogue stuff
-int currentScreen = 0;
+int currentScreen = 2;
 int framesCounter = 0;
 int messageCount = 0;
 float opacity = 0.0f;

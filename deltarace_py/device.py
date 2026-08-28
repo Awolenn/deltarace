@@ -97,10 +97,9 @@ while not window_should_close():
         stop_sound(w)
         stop_sound(man)
         set_target_fps(60)
-        for cardCounter in range(25):
-            for col in range(1, 6):
-                for row in range(1, 6):
-                    fun.makeCardPartOne(row, col, clickSound, ((row-1)+(col-1)*5))
+        for col in range(1, 6):
+            for row in range(1, 6):
+                fun.makeCardPartOne(row, col, clickSound, ((row-1)+(col-1)*5))
         fun.makeCreditsPartOne(clickSound, eggSound)
         fun.possibleBingoWinCheck(winSound)
     
@@ -150,12 +149,12 @@ while not window_should_close():
     # SCREEN 2 ; BINGO CARD
     elif fun.currentScreen == 2:
         # buffer clearing... oh i sound so smart saying buffer.
-        clear_background(RAYWHITE)
+        clear_background(fun.deeperBlueGray)
         # this is the fun aesthetic stuff, really. i guess none of it is required, but it's nice. it gets rendered before the cards because. i said so.
-        draw_rectangle(0, 600, fun.windowWidth, 100, GRAY)
-        draw_text_ex(sansFont, "SADIE AND SAM'S SUPER SAUCY BLINGO BLIZZARD!", [290, 600], fun.standardFontSize*2, 1, GREEN)
-        draw_text_ex(sansFont, "you only win the race if you beat all chapters and secret bosses\nAND fill outa bingo! for the easiest time verifying your bingo,\nstream your playthrough! hover over a card for details.", [290, 630], fun.standardFontSize*1, 0, GREEN)
-        draw_rectangle(0, 0, 280, fun.windowHeight, BLACK)
+        draw_rectangle(0, 600, fun.windowWidth, 100, fun.darkBlue)
+        draw_text_ex(sansFont, "SADIE AND SAM'S SUPER SAUCY BLINGO BLIZZARD!", [290, 600], fun.standardFontSize*2, 1, BLUE)
+        draw_text_ex(sansFont, "you only win the race if you beat all chapters and secret bosses\nAND fill outa bingo! for the easiest time verifying your bingo,\nstream your playthrough! hover over a card for details.", [290, 630], fun.standardFontSize*1, 0, BLUE)
+        draw_rectangle(0, 0, 280, fun.windowHeight, WHITE)
         # drawing the cards. might change a little for aesthetic purposes but holy fuck i don't want to do that lol.
         for col in range(1, 6):
             for row in range(1, 6):

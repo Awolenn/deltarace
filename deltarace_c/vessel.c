@@ -1,403 +1,508 @@
-const char* easyNames[] = {
-  "No skipping the Light World segments", //0
-  "For every chapter you beat, beat one area in Undertale", //1
-  "For every chapter you beat, beat one area in Undertale Yellow", //2
-  "Complete a new song in Friday Night Dustin' every time you die", //3
-  "Find Starwalker in every chapter", //4
-  "Get all the Eggs", //5
-  "Eat the Moss in every chapter", //6
-  "Get all Recruits", //7
-  "Go out of your way to lose every recruit", //8
-  "Do all the Dojo Fights", //9
-  "Get every FRIEND encounter", //10
-  "Beat Sans", //11
-  "Install whatever mod is first on GameBanana before playing", //12
-  "Beat one chapter twice", //13
-  "Draw the Fun Gang", //14
-  "Replace one chapter with DeltaChars' singleplayer campaign", //15
-  "Complete one night of Five Nights at Freddy's after finishing a chapter", //16
-  "Win a round of an asym of your choice every time you die", //17
-  "Only use S-Action and R-Action", //18
-  "Only use Pacify and Sleep Mist to spare enemies", //19
-  "Get every weapon and armor", //20
-  "Open every chest", //21
-  "Choose one chapter and replace it with the entire TS!Underswap demo", //22
-  "After beating a chapter, draw your favorite character from that chapter", //23
-  "You may only mark this space if you marked the spaces above, below, left, and right of this one.", //24
-  "You can't use completion data.", //25
-  "You have to watch a UTDR Analog Horror video every time you die.", //26
-  "Have you ever heard of Five Nights at Undertale's? No? Well, go beat it.", //27
-  "Write a 5 paragraph essay about the themes of the Weird route", //28
-  "Mute your audio.", //29
-  "Misgender Kris every time you want to refer to them", //30
-  "Beat Undyne the Undying", //31
-  "Whenever you see the Knight, rant about how the Knight is very obviously Papyrus", //32
-  "Give everyone else a 20 minute headstart", //33
-  "Whenever someone mentions a party member, shout 'OH, THAT GUY?? I KNOW THAT GUY!!'", //34
-  "Talk to Onion every time you can", //35
-  "You have to dress like Kris, or as close to Kris as possible, during the entire race", //36
-  "Every time you take a break, backtrack a certain amount", //37
-  "Every time anyone else beats a chapter, reload immediately", //38
-  "Use a [percentage] [color] mod with the settings set by someone else", //39
-  "Once you finish, read a Deltarune fanfiction out loud", //40
-  "Skip a chapter and be careful not to get caught! Or else...", //41
-  "Say that Nico/Techni/Chiro was kinda cooking off rip and defend yourself for it", //42
-  "Stick to the edges of the box during every enemy turn throughout your race", //43
-  "Create a Dustrune take", //44
-  "Solo call with a random person for a chapter", //45
-  "You have to listen to The Sick Mind of EDP445 on loop during the whole race", //46
-  "Purposefully trigger the dogcheck on every chapter", //47
-  "Collect evidence for a non-popular Knight candidate", //48
-  "Unironically say that you goon to Aqua", //49
-  "You have to end every fight with a party member downed", //50
-  "Any time you can't skip dialogue, you have to dub it in an annoying voice", //51
-  "Play the whole game in Japanese",
-  "When trying to use any action that costs TP, you MUST get your TP to 100 percent before usage",
-  "Become linked to another person and have them control your puzzles and vice versa",
-  "Choose the worst dialogue choice every chance you get", //55
-  "Maximize Kris' kit for magic even though they don't have a use for it",
-  "Even if you beat a secret boss, you can't use their reward items",
-  "Exhaust every Talk option during full screen shops",
-  "Use Check every time you encounter an enemy for the first time",
-  "Collect every ReviveMint but don't use any of them", //60
-  "If you die, you have to read an act of Homestuck",
-  "Play with a friend", 
-  "You have to watch 'If Deltarune was Realistic'",
-
-  // CHAPTER ONE
-  "Listen to Ralsei's tale in Chapter 1",
-  "Do Ralsei's tutorial in Chapter 1", //65
-  "Make your Thrash Machine full duck",
-  "Buy one of everything in Seam's Seap",
-  "Beat Jevil by FIGHTING, except you use Pirouette every turn you can",
-  "Beat K. Round's rematch without Susie's Idea",
-  "Fight all encounters in Chapter 1 and get the ending where Ralsei pacifies the King", //70
-  "Talk to every Hometown NPC in Chapter 1",
-  "Fix the TopCake",
-  "Complete Chapter 1 on a SURVEY_PROGRAM build",
-  "Beat Chapter 1 itemless",
-  "Name yourself Gaster during the goner maker", //75
-  "Don't equip any new weapons or armor during Chapter 1",
-  "Defeat both Jevil and King by fighting, but you can only deal damage with Rude Buster",
-  "Die to Lancer during the opeing ambush",
-  "Every change you get during Chapter 1, use Pacify, even if you're totally wasting the TP",
-  "Throw away the Manual", //80
-  "Name your party the $!$? Squad",
-
-  // CHAPTER TWO
-  "Recruit Hacker", 
-  "Recruit the Electro-Dashers", 
-  "Get the Ragger2", 
-  "Do the Weird Route", //85
-  "Do the Weird Route and abort after getting the ThornRing", 
-  "Do Spamton NEO on Hard Mode", 
-  "Make sure Lancer is well fed", 
-  "Enter a fight with a full inventory of S. Poison and then use every single one", 
-  "Don't equip any new weapons or armor during Chapter 2", //90
-  "Beat Chapter 2 Itemless", 
-  "Beat Spamton NEO without firing a [[ BIG SHOT! ]]", 
-  "Taunt Berdly with the appealing blue shape",
-  "Give Noelle your best armor and let her take them with her",
-
-  // CHAPTER THREE
-  "Get an S Rank (any board)", //95
-  "Get a Z Rank (any board)", 
-  "Get all 5 keys in Board 1", 
-  "Win a round of Susiezilla",
-  "Get the 1225 secret in Chapter 3", 
-  "Go to the Bonus Zone in Chapter 3", //100
-  "Use the Dog button during the Rouxls Fight", 
-  "Don't equip any new weapons or armor during Chapter 3", 
-  "Beat Chapter 3 Itemless",
-  "Name yourself ASS during Chapter 3",
-  "You can only use ILoveTV during the Tenna fight", //105
-  "You have to 100 percent every Quiz during Board 1",
-
-  // CHAPTER FOUR 
-  "Do the Weird Route and abort in Chapter 4", 
-  "Always use Rude Buster against Gerson and never fumble the parry chain",
-  "Do at least 5 Piano Secrets in Chapter 4", 
-  "Fight the Mikes", //110
-  "Listen to Kris' entire phone call as they drink the chocolate milk", 
-  "Get the GoldWidow",
-  "Get the DogDollar in Chapter 4", 
-  "Beat Gerson and Sound of Justice while only pointing your shield up and down", 
-  "Don't equip any new weapons or armor during Chapter 4", //115
-  "Beat Chapter 4 Itemless",
-  "Record yourself trying to open a Dark Fountain after Susie does it",
-
-  // CHAPTER FIVE
-  "Do the Weird Route and abort in Chapter 5", 
-  "Make Susie's outfit full duck", 
-  "Get at least 100 Flowery Dollars from the infinite chest", //120
-  "Defeat Pink with meaner bombs", 
-  "Get all the Pink Coins", 
-  "Go take a picture of any water during the Light World lake scene in Chapter 5", 
-  "Go outside and take a photo of the sun when the Sunset of Seven Suns beat drops", 
-  "Do every Suselle interaction during the Festival", //125
-  "Do every Krusie interaction during the Festival", 
-  "Do every Kriselle interaction during the Festival", 
-  "Do 4rd Sanctuary in Castle Town", 
-  "Beat Pink while only using Kris' regular Doki act", 
-  "If you die on Pink once, record a cover of chai's Cutie Mew Mew Magic with lyrics", //130
-  "Talk to Pink about FRIEND",
-  "Waste all your items on Flowery once he's in your party", 
-  "Don't equip any new weapons or armor during Chapter 5", 
-  "End every fight that you can with Scythemare",
-  "Beat Chapter 5 Itemless", //135
-  "Every time you see a flower's Omega, beat the Omega Flowey fight in Undertale",
-  "Very annoyingly sing Flower Man's lyrics when you fight Flowery",
-  "You can only speak in Flowery voice lines during Chapter 5"
-};
-const int easyNamesLen = sizeof easyNames / sizeof *easyNames;
-
-const char* hardNames[] = {
-  "Beat Undertale: Last Breath", //0
-  "Don't equip any new armors or weapons. Ever.", 
-  "Beat an FDY Fangame (no noob mode)", 
-  "Beat Sans 5 times", 
-  "Set up and run a solo Deltarune Archipelago for any 1 chapter", 
-  "Someone else chooses your keybinds for 1 chapter", //5
-  "No running. Ever.", 
-  "Once you get to Chapter 5, switch chapters with the person who's in last", 
-  "You can only save once per chapter", 
+const char* oneStarNames[] = {
+  "Draw the Fun Gang",
+  "Draw your favorite Deltarune characters from each chapter duking it out",
   " ",
-  "Every time you encounter an enemy, draw them on one canvas", //10 
-  "Mod yourself over a party member",
-  "Set your monitor brightness to the lowest setting where you can still see",
-  "Someone else in the VC gets to choose a challenge for this space",
+  "Watch 5 UTDR Analog Horror videos",
+  "Whenever someone mentions a party member, shout 'OH, THAT GUY?? I KNOW THAT GUY!!'",
+  "Give everyone else a 20 minute headstart",
+  "Throw away the Manual",
+  "Unironically say that you goon to Aqua",
+  "Cosplay a random UTDR, or as close to them as possible, during the entire race",
   "Free space, but you give Sadie an I.O.U.",
-  "Use the Custom Difficulty mod with the Hard Preset", //15
-  "Use the Custom Difficulty mod with the Nightmare Preset",
-  "Use the Custom Difficulty mod with the Nightmare-EX Preset",
-  "Use the Custom Difficulty mod with the Nightmare-NEO Preset",
-  "Use the No I-Frames mod",
-  "Beat Mifune's Sans Hard Mode Fight", //20
-  "1v1 the person who finishes after you in a game of their choice",
-  "Get 5 killer wins in The Roaring - Deltarune (the asym)",
-  "You can't move the soul during fights",
-  "Get all 93 endings in Undertale",
-  "You can only equip new armors and weapons on Ralsei", //25
-  "Every single bingo space must be completed on its own save file",
+  "Say that Nico, Techni, or Chiro was kinda cooking off rip and defend yourself for it",
+  "Name yourself 'ASS' during Chapter 3",
+  "Upon death or failing to complete a space, cry extremely loudly",
+  "Watch the Homestuck pilot",
+  "Free space, but if you take a break longer than 15 minutes, unmark a space the VC picks",
+  "Listen to Ralsei's tale in Chapter 1",
+  "Recruit the Hacker",
+  "Very annoyingly karaoke Flower Man's lyrics",
+  "Die to Lancer during the opening ambush",
+  "Read a Deltarune fanfiction piece out loud",
+  "Record yourself trying to open a Dark Fountain",
+  "Do every Krusie interaction during the Festival",
+  "Make Susie's outfit full duck",
+  "Go outside and take a photo of the sun or the moon",
+  "Record a cover of chai's Mew Mew Magic",
+  "Do Ralsei's tutorial in Chapter 1",
+  "Make your Thrash Machine full duck",
+  "Name yourself Gaster during the goner maker",
+  "Name your party the $!$? Squad",
+  "Deltarune memes that will make you the funniest person in the group chat",
+  "Solo call with a random person and don't rejoin until 30 minutes have elapsed",
+  "Do the MTT Challenge",
+  "Sit through the entirety of Glitchtale's first season"
+}; // LIST ^^^ vvv LENGTH VARIABLE
+const int oneStarNamesLen = sizeof oneStarNames / sizeof *oneStarNames;
 
-  // CHAPTER ONE
-  "You have to defeat both Jevil and King via violence with only Ralsei",
-  "No-hit King", //28
+const char* twoStarNames[] = {
+  "Sit through Deltarune's introduction without skipping",
+  "Do all the Dojo Fights",
+  "Complete a random song in Friday Night Dustin'",
+  "Beat DeltaChar's singleplayer campaign",
+  "Complete one night of Five Nights at Freddy's after marking a bingo space",
+  "Draw every enemy Darkner",
+  "Use every Talk option in a full-screen shop in UT/DR without skipping",
+  "Find enough evidence to build a case for Papyrus being the Knight",
+  "Complete a hypothetical in DELTARUNE - Hypothesis",
+  "Win 3 games of UNOTALE",
+  "Listen to The Sick Mind of EDP445",
+  "Get an 100 percent on every Board 1 quiz",
+  "Create a never-seen-before Knight theory and get a 50 percent approval rating",
+  "Get the Ragger2",
+  "Fix the TopCake",
+  "Only speak in Flowery voice lines",
+  "Watch 'If Deltarune was Realistic'",
+  "Beat Omega Flowey",
+  "Recruit the Electro-Dashers",
+  "Get at least 100 Flowery Dollars from the infinite chest",
+  "Do a tier list of every character in UTDR",
+  "Beat K. Round's rematch without Susie's Idea",
+  "Talk to every Hometown NPC",
+  "Do 4rd Sanctuary in Castle Town",
+  "Get the 1225 secret",
+  "Take a picture of water and recreate IMAGE_DEPTHS as closely as possible",
+  "Get every secret Toriel phone call in the long hallway in Undertale",
+  "Get a full inventory in Undertale or Deltarune",
+  "Fight Glyde",
+  "Get the best result in Ball Game",
+  "Complete the Monster Kidz Word Search",
+  "Pet Lesser Dog until he's beyond your reach",
+  "Try to get the Legendary Artifact",
+  "Beat So Sorry",
+  "Play 10-25 rounds of Undertale: Judgement Day",
+  "Get 1 million in Clickertale 2",
+  "Get that one secret in Facing Demons",
+  "Get any ending in Undertale: Act to Flirt",
+  "Beat Mad Mew Mew",
+  "Someone else does a space for you",
+  "Powerscale the Undertale characters and make a top 10 strongest in the verse",
+  "Make an Omega MC"
+}; // LIST ^^^ vvv LENGTH VARIABLE
+const int twoStarNamesLen = sizeof twoStarNames / sizeof *twoStarNames;
 
-  // CHAPTER THREE
-  "Get a T Rank (any board)", 
-  "Defeat the Knight mantleless", //30
-  "Use Kaizo Knight", 
-  "Full combo Lightners Live",
-  
-  // CHAPTER FOUR
-  "Use the secret Ultimate Boss Rush Mod Mod and complete it during Chapter 4",
-  
-  // CHAPTER FIVE
-  "Use Determination Flowery",
-  "Beat Flowery without dashing", //35
-  "Force yourself to die to THAT attack during the Seth and Aqua fight.",
-};
-const int hardNamesLen = sizeof hardNames / sizeof *hardNames;
+const char* threeStarNames[] = {
+  "Complete Undertale up to a random area",
+  "Exhaust the kill count in a random Undertale area",
+  "Beat Sans",
+  "Get all Recruits in a random chapter",
+  "Get every FRIEND encounter",
+  "Beat a random Chapter",
+  "Beat Chapter 1 with the [percentage] [color] mod but...",
+  "Complete Undertale Yellow up to a random area",
+  "Every 30 minutes, detour to a random asym of your choice and win a round",
+  "Complete the TS!Underswap demo",
+  "Only mark this space if the spaces above, below, and to the sides are marked",
+  "Have you ever heard of Five Nights at Undertale's? No? Well, go beat it.",
+  "Write a 5 paragraph essay about the themes of the Weird Route",
+  "Play with muted audio during the whole race",
+  "Play with the lowest brightness where you can still see during the whole race",
+  "Create a Dustrune take",
+  "Make a Deltarune sprite animation",
+  "Beat Undyne the Undying",
+  "Play a random chapter with a friend",
+  "Complete Chapter 2's Weird Route in Japanese",
+  "Make a Deltarune OST With Lyrics",
+  "Design a Deltarune restaurant",
+  "Do every piano secret",
+  "Complete the entirety of the Weird Route",
+  "Beat a Sans fangame while dubbing it in an annoying voice",
+  "Beat the Undertale: True Genocide demo",
+  "What the fuck?! Sonic?!",
+  "Play as Team Sonic during Chapter 5 platforming segments",
+  "Win a round of Susiezilla",
+  "Complete a SURVEY_PROGRAM build",
+  "Get 5 killer wins in The Roaring - Deltarune",
+  "Beat Deltarune: Prophecy of Justice for Chapter 1",
+  "Go to the Bonus Zone",
+  "YOU'RE AQUA NOW! THAT'S MY ATTACK!",
+  "Use a full inventory of S. Poison in a fight without dying",
+  "Get an S Rank in any board",
+  "Beat Jevil by FIGHTing while also using Pirouette every turn you can.",
+  "Beat Tenna while only using 'ILoveTV'",
+  "Use the 'Dog' button during the Rouxls fight",
+  "Get five different people in Deltarune Connected to say they're sorry",
+  "Get all 5 keys in Board 1",
+  "Make sure Lancer is well fed",
+  "Purposefully trigger the Dogcheck in each Chapter",
+  "Fight the Mikes",
+  "KILL FRIEND",
+  "Play Undertale until you find a random enemy",
+  "Catch the Extremely Agile Glass of Water without Alphys trapping it",
+  "No-hit Cooking with a Killer Robot",
+  "Complete the Mettaton Tile Puzzle",
+  "Get the temy armor",
+  "Beat Asriel Dreemurr after dying 50 times in the fight",
+  "Beat Undertale Hard Mode",
+  "Exhaust the Ruins kill counter, but you can only kill Froggits",
+  "Beat Deltarune: The Upper Hand",
+  "Beat Deltarune: Reimagined - ANGELIC ALTERCATION",
+  "Beat Bad Monday Simulator",
+  "Beat Ink!Sans Fight",
+  "Beat Evan's Dusttale",
+  "Get a 10 win streak in Undercards",
+  "Make a fake Sans Comic TV comic dub",
+  "Beat Dusttrust X",
+  "it's all just a game",
+  "Beat Undertale: No More Deals",
+  "Spin for a random character. You must find that character in DONTFORGET",
+  "Beat the Ribbit Mod",
+  "Beat Undertale II: Revenge of the Robots",
+  "Beat UNDERFELL: One Hell of a Show",
+  "Get both endings in Undertale: Plan B",
+  "Beat TrueLab.EXE",
+  "Beat Sans' 10th anniversary fight",
+  "Find and document 50 differences in C!Undertale"
+}; // LIST ^^^ vvv LENGTH VARIABLE
+const int threeStarNamesLen = sizeof threeStarNames / sizeof *threeStarNames;
 
-const char* easyDesc[] = {
-  "You're not allowed to skip any of the Light World sections by sleeping. If you don't want to stream this, make sure to record yourself not sleep skipping if you want to prove it!", //0
-  "You can stream this... or you can just beat the area and then take a picture of your save file and send it if you want to prove it.", //1
-  "You can stream this... or you can just beat the area and then take a picture of your save file and send it if you want to prove it.", //2
-  "If you want to prove this one, stream it!", //3
-  "Find him, and take pictures of him to prove it! Each one of him.", //4 
-  "Find them, and take pictures of them to prove it! Don't forget a single one.", //5
-  "Eat the Moss whenever you can and send screenshots of your changing titles.", //6
-  "Take a picture of your recruits page to prove this one!",  //7
-  "Take a picture of your recruits page to prove this one. Chapter 1 and forced recruits get a pass.", 
-  "This includes the Trashy Trio. If you want to prove this one, take a picture of the Dojo in Chapter 4 and a screenshot after the Trashy Trio fight in Chapter 5.", 
-  "People see pink and yellow and think, oh, a friend! Make sure to record every encounter!", 
-  "Stream you beating Sans or take a picture of him asleep to prove it.", 
-  "Take a screenshot of the mod on the first page and whatever it does in the game to prove this one. Or, uh, stream the game effects instead of taking a picture.", 
-  "...you don't have to do anything beyond streaming.", 
-  "Make sure to show us your art if you want to prove this one!", 
-  "Send a picture of you beating Black Eggman (why the fuck is that his name [Eggman Nega!]) to prove this. Streaming it also works.", //15
-  "Stream it or send a picture of your Five Nights at Freddy's main menu screen to prove this one.", 
-  "This sounds like it'll suck. You have to do this every time you die. Make sure to send a picture of every result screen to prove it, or stream your gameplay. Both work.", 
-  "If it's necessary to do something else, you get a pass, such as during Chapter 1. Make sure to take notes on what Susie and Ralsei do, you're gonna be quizzed on it!", 
-  "You'll have to stream your game for this one to be proved...", 
-  "If you wanna prove this one, take a picture of every weapon and armor in your possession by the end of the game.", //20
-  "Make sure to take notes on what these chests contain and where, you're gonna be quizzed on it!", 
-  "Make sure to take a picture of your save file once you're done, or stream the gameplay!", 
-  "Make sure to send a picture of your lovely art!",
-  "It's like the Game of Life or something...", 
-  "Make sure to show off your starting inventory in every chapter.", //25
-  "Send a picture of your watch history after the race to prove this one... maybe tell us some fun facts or something, too. You can stream it if you want a watch party.", 
-  "Send a picture of you beating this. Cause I told you to go beat it. You could stream it, too.",
-  "You gotta send a picture of the essay and get a 50 percent approval rating from the VC for this one to be marked! Five sentences per paragraph, at the very least.",
-  "Only Deltarune has to be muted, you need to hear us after all! Make sure to take a picture of your audio settings and stream it so we can hear it! Or, uh, the lack of it...",
-  "You are not allowed to tell the VC that this is on your bingo board, and... don't worry about proving this, it'll be... very obvious.", //30
-  "Make sure to take a picture of her melty ass corpse! Or stream the fight!",
-  "The rant has to be aggressively long and winding, lasting multiple minutes and disturbing any previous conversation or thoughts you were in the middle of. It'll be kinda obvious, so don't worry about proving it.",
-  "Make sure to stream you dicking around and doing nothing for 20 minutes. If I see a damn hint of movement, I'll kick your ass.",
-  "You only have to do this if the member is in your party. If they aren't, don't worry about this, unless you want to. ...you don't need to prove this one, it'll be glaringly obvious.",
-  "Make sure to take pictures of your Onion encounters!", //35
-  "Take a picture of yourself to prove this one! You can censor your face, don't worry.",
-  "A timer starts once your break starts that determines how long you have to actively backtrack for when you get back. You can resume playing normally once the timer is up or if you encounter a part you can't backtrack past. Make sure you stream this so it can be verified that you are, in fact, backtracking.",
-  "Regardless of how close you were to the next save, you'll have to reload!. Make sure you stream this so it can be verified that you are, in fact, reloading.",
-  "Make sure to stream your colorful gameplay!",
-  "you can't mark this space and complete your bingo until the fanfiction is completely finished. um. i think. it's pretty obvious. this one i mean. i think we'll know. when you. read it out loud. and stuff.", //40
-  "You can skip a chapter and see if anyone notices. If no one notices, you can get away with it! If they do, you have to play the chapter you skipped and the one before it. You kinda have to try NOT to prove this one, hm? ",
-  "You can't take this back or reveal that it was on your bingo board. We'll know if you do it.",
-  "Make sure to stream this one to prove it.",
-  "Make sure it has character designs for main characters and chapter antagonists (Kris, Susie, Ralsei, Noelle, Berdly, King, Queen, Tenna, the Knight, Gerson, the Titan, and Flowery) and a basic outline of what chapters 1-5 would look like. You have to get a 50 percent approval rating from the VC to mark this space.",
-  "You have to get in a DM call with someone completely random (spun by wheel), and can't rejoin the main VC until you both beat a chapter. You can't pick someone who's already beaten their race. You have to take a picture of you and your new pal in the DM call to prove this one.", //45
-  "You have to take a picture of your watch history to prove this one. A watch party works too.",
-  "You have to record each Dogcheck to prove this one.",
-  "Throughout your playthrough, build evidence for a Knight identity case and make it at least mildly convincing. Popular Knight candidates are not allowed. You kinda have to tell us the theory. I think. We might know.",
-  "You can't take this back or say it was on your bingo board. It'll be pretty obvious if you do this, don't worry about proving it.",
-  "Make sure to stream! Solo fights are excluded.",
-  "it's pretty fucking obvious",
-  "Send pictures of... your Japanese game... we'll know cause... it'll be in... Japanese...",
-  "Make sure you stream this one!",
-  "Become linked to another person. When that person enters a puzzle, they can only do what you tell them to do, and vice versa. Make sure to communicate in a way that others who aren't part of the link can see or hear.",
-  "Make sure to take notes on these choices, you'll be quizzed!", //55
-  "Make sure to show off Kris' amazing magic stat to prove this one.",
-  "Show us the party's loadout going into Flowery.",
-  "just send a image of you doing this like each time",
-  "Make sure you remember these Checks! You're gonna be quizzed.",
-  "Send us a picture of all those beauties in your storage before Flowery...", //60
-  "You're gonna get quizzed on this. By 'act', it's just a section in the Adventure Map, so Intermissions and acts inside acts are included as their own acts. Ask that homestuck nerd if you're confused... you know the one. That homestuck nerd. So disgusting. Ugh, why do I have a throbbing boner?!",
-  "You have to use the Deltarune Local Multiplayer Mod and play with a friend via Parsec or other means. The friend must complete their own bingo while you work on yours, and the two of you are now a pseudo-team, sharing the placement in the final ranking as well. If your partner does not complete their bingo by the time you're at the end of the game, even if you finished yours, both of you do not qualify for completion of the race. You can stream it for fun, I guess.",
-  "You must watch both parts of 'If Deltarune was Realistic' by SmashBits and show evidence of it being in your watch history (or watch it with everyone in a fun watch party) to mark this space. You are not allowed to have it on in the background while you play. You must watch it and you will be quizzed.",
+const char* fourStarNames[] = {
+  "Beat Sans 5 times in a row",
+  "Find Starwalker in all 5 Chapters",
+  "Get all the \"Eggs\"",
+  "Eat the Moss in every Chapter",
+  "Set up and run a Deltarune Archipelago with someone else for a Chapter",
+  "Beat Chapter 1, but someone else chooses your keybinds",
+  "Beat Chapter 2 while only using Pacify and Sleep Mist to defeat enemies",
+  "Beat every secret boss",
+  "Mod yourself over a party member in Deltarune",
+  "Beat Jevil by pacifying while only using Pirouette and Hypnosis when you have 100 percent TP",
+  "Fight the Knight in Sonic 3 A.I.R.",
+  "Beat Spamton NEO without firing a big shot",
+  "Beat Jevil via pacifying while using Pacify constantly",
+  "Get a score of 1000 in Deltarune Battles",
+  "Defeat Gerson by fighting while only progressing the fight with Rude Buster",
+  "Get the GoldWidow",
+  "Get every achievement in Deltarune",
+  "Beat Lost Deltarune after you've lost",
+  "Beat Gerson without moving the SOUL",
+  "Complete the collection in Spamton Subplot",
+  "No-hit King",
+  "Beat the Roaring Knight without Ralsei ever being downed",
+  "Get a T Rank in any board",
+  "Beat Mifune's Sans Hard Mode Fight",
+  "Free space but 1v1 the person who finishes after you in a game of their choice",
+  "Free space but if someone finds out you marked this, you must unmark all spaces except this",
+  "Beat Gerson but stick to the edges of the box when the SOUL is red",
+  "Die to THAT attack during Seth and Aqua's fight",
+  "Beat a random Chapter, but every time someone mentions the name of the final boss, drop all items",
+  "Defeat the Knight without the ShadowMantle",
+  "Beat Jevil with only the base equipment",
+  "Get a Z Rank in any board",
+  "Do Spamton NEO on Hard Mode",
+  "Beat Pink while only using Flirt",
+  "Get all the Pink Coins",
+  "Get all the DogDollars",
+  "Beat Gerson and Sound of Justice while only pointing the shield up and down",
+  "Defeat Pink with meaner bombs",
+  "Encounter every fun event in Undertale",
+  "Complete a random Undertale ending",
+  "Beat Sans while only healing with Spider items",
+  "Beat Undyne the Undying with only the stick and perfectly timed attacks",
+  "Beat Sans while holding X the whole time",
+  "Beat Sans while Frisk is bleeding",
+  "Do an Undertale boss rush with mini-challenges each boss",
+  "Beat Undyne blind",
+  "Beat Bad Time Simulator's Hard Mode",
+  "Clear literally any fight in Great Time Trio REMAKE",
+  "Deltatraveler",
+  "Beat Cezar's Disbelief Mod",
+  "Get at least 50 points in accordance to the UDCC Points Sheet",
+  "Beat a LV 9 CPU playing as a UTDR character in Rivals of Aether",
+  "Play Hypixel Build Battle and build a UTDR character without being in the bottom half",
+  "Complete a boss rush using UNDERTALE: Monster Arena",
+  "Mod Undertale and create one of those '50 percent more color' mods.",
+  "Beat the max difficulty on Bonetale on LV 3",
+  "Find a random block in the Undertale in Minecraft world",
+  "Guys, is my OC noticeable?",
+  "Bake a real Cinnamon-Butterscotch Pie",
+  "During the race, you can only communicate in wingdings",
+  "You can't speak English"
+}; // LIST ^^^ vvv LENGTH VARIABLE
+const int fourStarNamesLen = sizeof fourStarNames / sizeof *fourStarNames;
 
-  // CHAPTER ONE
-  "Make sure to record his tale. He'd appreciate it, I think. And you need to prove it.", 
-  "Make sure to record it. To prove it.", //65
-  "Make sure to record Ralsei's priceless reaction!", 
-  "Make sure to take a picture of all their items in your inventory. Why is this game so woke? Always they/thems, where's the he/hims and the she/hers?",
-  "Make sure to record this fight. It's probably really funny.", 
-  "Make sure to record this fight. It's probably REALLY funny.",
-  "Make sure you record the ending!", //70
-  "Make sure to record you talking to everyone!", 
-  "Make sure you take a picture! Lovely TopCake... fuck im such a hungry bitch im fuckign salivating on to my fucking keyboard",
-  "Make sure you take a picture of the build in your favorite file manager. Like uh. File Explorer. And show off the wrist protector! If you were fast enough to get it, that is.", 
-  "Stream this one... can't have you sneaking things behind our backs! Johnny johnny yes papa eating sugar no papa telling lies no papa open ur mouth ah ah ah", 
-  "Record this one. Try not to let him fucking smite you or whatever irl feats be doing.",  //75
-  "Take a picture of your loadout at the end to prove it!", 
-  "Dealing damage with Kris, Ralsei, or Susie's normal attack is banned. You must record both fights for this to count.",
-  "During Chapter 1, when Lancer ambushes you for the first time, you must die to his assault once before you can get past the encounter. Record yourself dying to him for this to count.",
-  "During Chapter 1, you must immediately waste TP on Pacify if you can cast it, even if the enemy is not TIRED. Make sure to stream this!.",
-  "When you receive it, throw away the Manual instantly, which will take a few tries due to Ralsei trying to give it back to you. Send a screenshot of the Manual not being in your inventory after you should have received it for this to count.", //80
-  "When naming your party in Chapter 1, name yourself the $!$? Squad. Send a screenshot of you choosing this name to prove it!",
+const char* fiveStarNames[] = {
+  "Someone else chooses a mod for you to complete",
+  "Beat Undertale: Last Breath",
+  "Beat an FDY Fangame",
+  "If this is the last space left in your bingo, switch progress with someone else",
+  "Beat the Roaring Knight while using the No I-Frame mod",
+  "Beat the Shadow Boss Rush using the Ultimate Boss Rush Mod",
+  "Someone else in the VC gets to choose a challenge for this space",
+  "Get all 93 endings in Undertale (please don't do this)",
+  "Beat Chapter 1 using the Custom Difficulty Mod, but someone else chooses all the settings",
+  "Beat Kaizo Knight",
+  "Every time you want to complete a bingo space, start over from the beginning of the target game",
+  "Beat Chapter 4 with the Chaos Randomizer on CHAOS",
+  "Every time anyone else says they marked a space, you must choose a space to sacrifice",
+  "Beat a random secret boss itemless",
+  "Beat Determination Flowery",
+  "Beat Flowery without dashing",
+  "Use the Ultimate Boss Rush Mod Mod and complete the Super Mega Ultimate Boss Rush",
+  "Play with KAIZO!Jevil",
+  "Link to another person, you must tell that person which spaces to pursue and they do the same to you",
+  "Beat A Flower's Dream (Geometry Dash)",
+  "Buy the Undertale 9999G Spider Donut without SAVE editing",
+  "Read all of Homestuck (please don't do this)",
+  "Start a UTDR Parody Twitter and rack up 50 followers as fast as possible",
+  "No-hit ERAM",
+  "Beat Baldi's Eductional Tale"
+}; // LIST ^^^ vvv LENGTH VARIABLE
+const int fiveStarNamesLen = sizeof fiveStarNames / sizeof *fiveStarNames;
 
-  // CHAPTER TWO
-  "During the Cyber City, you can recruit the Hacker by collecting the checkmarks, and he'll show up in Castle Town. Send a screenshot of the Hacker in Castle Town for this to count!", 
-  "During the Cyber City, you can recruit the Electro-Dasher by not hitting too many of them during the car segment, and they'll show up as in Castle Town. Send a screenshot of the miniature Electro-Dasher in front of Castle Town's Great Door for this to count!", 
-  "During the Cyber Field, you can get the Ragger2 by collecting every purple orb leading up to the first Berdly encounter. You must get the Ragger2 and take a screenshot of it being in your inventory for it to count.", 
-  "Your playthrough of Deltarune must be a Weird Route playthrough. The exception is Chapter 5, in which you must do a weird playthrough and then a normal playthrough in order to fight Pink, which is required to count as beating the game. In order for this space to count, you must record yourself doing the Chapter 5 lake scene.", //85
-  "Your playthrough of Deltarune must be a Weird Route playthrough that gets aborted at the Berdly encounter, meaning he does not get frozen. In order to prove this space, take a screenshot of Noelle having the ThornRing after the Berdly encounter, as if you fail to abort the route here, Noelle will leave the party immediately after the Berdly encounter and you will be unable to get the screenshot.", 
-  "When fighting Spamton NEO, you must trigger his hard mode by doing the big shot bug. Record yourself completing the fight this way for this space to count.", 
-  "In Queen's Mansion, push the Lancer statue to the table to feed him. You must take a screenshot of him being well fed to prove this space.", 
-  "Once you unlock Spamton's shop, you must fill your inventory with S. Poisons. You must then enter a fight and use every one in a single encounter. To prove this space, record yourself doing it.", 
-  "During Chapter 2, you are not allowed to collect and use any armor or weapons from the chapter. To prove this, you must take a screenshot of your post-chapter inventory, showing that you have no Chapter 2 armors or weapons.", //90
-  "Throughout Chapter 2, you are not allowed to pick up any Chapter 2 items or use any items from Chapters 1. You must take a screenshot of your post-Chapter 1 inventory and your post-Chapter 2 inventory, showing that they're identical, for this space to count.", 
-  "When fighting Spamton NEO, you must avoid firing a big shot (except for in the tutorial). In order to prove this space, you must record yourself completing the entire fight without firing a big shot.", 
-  "During Queen's Mansion, taunt Berdly with the 'appealing blue shape'. Take a screenshot of you doing this.",
-  "When Noelle enters your party in Chapter 2, give her your best armors and don't take them off her. She will leave the party and take them with her. Take a screenshot of the armors you gave her to prove this space, along with the lack of them from your inventory after she leaves.",
+// NAMES ^^^ vvv DESCRIPTIONS
 
-  // CHAPTER THREE
-  "During any board in Chapter 3, you must get an S-Rank as your final result. You must take a screenshot of your results screen to prove this one.", //95
-  "During any board in Chapter 3, you must get a Z-Rank as your final result. You must take a screenshot of your results screen to prove this one.", 
-  "During the Desert Board, you must collect all 5 keys. You must take a screenshot of all 5 keys being in your inventory, or getting the bonus for collecting both extra keys.", 
-  "In Chapter 3, you must unlock Susiezilla and complete it all the way through at least once. You must take a screenshot of the results screen to prove this one.",
-  "In the C-Rank room, trigger the 1225 secret in the Gacha machine. You must take a screenshot of the secret to prove this space.", 
-  "During TV World, you must go to the Bonus Zone. You do not have to trigger the cutscene with Spamton. Take a screenshot of your party standing in the Bonus Zone for this space to count.", //100
-  "During the Rouxls Kaard encounter in Chapter 3, you must at some point trigger the dog button to appear and use it at least once. You must take a screenshot of the dog button or the resulting cutscene to prove this space.", 
-  "During Chapter 3, you are not allowed to collect and use any armor or weapons from the chapter. To prove this, you must take a screenshot of your post-chapter inventory, showing that you have no Chapter 3 armors or weapons.", 
-  "Throughout Chapter 3, you are not allowed to pick up any Chapter 3 items or use any items from Chapters 1 and 2. You must take a screenshot of your post-Chapter 2 inventory and your post-Chapter 3 inventory, showing that they're identical, for this space to count.",
-  "When naming your podium in Chapter 3, type in 'ASS'. You must take a screenshot of your podium to prove this one.",
-  "When you fight Tenna, the only thing you are allowed to do to gain score is Kris' ILoveTV. No minigames are permitted, nor usage of Ralsei or Susie's acts.", //105
-  "When in the Desert Board, every Quiz you must do must be 100%. If you miss a question, you have to reload the board and start over immediately. You must screenshot your results for each quiz to prove this space.",
-
-  // CHAPTER FOUR 
-  "Your playthrough of Deltarune must be a Weird Route that gets aborted during Chapter 4. You must record yourself aborting the route to prove it.", 
-  "During the Gerson fight, whenever you have the TP for it, you must use Rude Buster and complete the full parry chain. You must record this fight fully to prove you did it.",
-  "When you are at the big piano in Chapter 4, you must do at least five hidden melody secrets. You must record yourself doing this fully.", 
-  "When you get the chance during Chapter 4, you must fight the Mikes. Send a screenshot of yourself at the end of the Mike fight to prove this space.", //110
-  "During the Holiday manor segment in Chapter 4, you must record Kris' entire phone call as they pour themselves the chocolate milk. The recording will prove completion of the space.", 
-  "You must donate to the fountain in Chapter 4 and receive the GoldWidow later on. You must send a screenshot of you having the GoldWidow to prove this one.",
-  "You must do the dog race in Chapter 4 and receive the DogDollar. You must send a screenshot of you having the DogDollar in your inventory to prove this space.", 
-  "During the Gerson and Sound of Justice fights, you are only allowed to point your shield up and down. To prove this, you must record both fights. In the Gerson fight, diagonals are not allowed.", 
-  "During Chapter 4, you are not allowed to collect and use any armor or weapons from the chapter. To prove this, you must take a screenshot of your post-chapter inventory, showing that you have no Chapter 4 armors or weapons.", //115
-  "During Chapter 4, you are not allowed to pick up any Chapter 4 items or use any items from Chapters 1-3. To prove this one, you must send a screenshot of your post-Chapter 3 inventory and post-Chapter 4 inventory, proving them to be identical.",
-  "When Susie opens the Dark Fountain in Chapter 4, you must record yourself mimicking the animation in real life. You may censor your face. You must be all in, even doing a full jump and having a weapon. The video you take will prove this space.",
-
-  // CHAPTER FIVE
-  "Your playthrough of Deltarune must be a Weird Route playthrough that is aborted at Chapter 5. In order to prove this one, you must take a screenshot of the route abortion cutscene.", 
-  "During Chapter 5's Castle Town segment, you must make Susie's outfit for the festival full duck. You must send a screenshot of Susie wearing the duck outfit to count this space. ", 
-  "When Flowery gives you the chest with infinite currency, you must go out of your way to collect at least 100 F$. In order to prove this one, you must show that your inventory has 100 F$ after collecting them all from the infinite chest, as this is the first instance of you collecting Flowery dollars.", //120
-  "During the Pink fight, you must die to her once to be able to change the bomb settings, and choose meaner bombs. You must record yourself doing the entire Pink fight like this to prove it.", 
-  "Throughout your playthrough of Chapter 5, you must collect all the Pink Coins. In order to prove this one, you must show that you have one pink coin left over after buying the three flower items, or show that you used up the last pink coin.", 
-  "During Chapter 5, when you do the scene at the lake (normal or weird), you must go find any form of water and take a photo of it. Water that comes in man-made forms, such as bottled water or sink water, is okay.", 
-  "During Chapter 5, when you hear the beat drop during 'Sunset of Seven Suns', you must immediately leave and go take a picture of the sun. You do not have to do this multiple times. You must leave your house to do so - no window photos. Send the photo you took of the sun to prove it.", 
-  "During the Festival, you must go to every attraction and pick Susie and Noelle to do them. You must record your festival segment to prove it.", //125
-  "During the Festival, you must go to every attraction and pick Kris and Susie to do them. You must record your festival segment to prove it.", 
-  "During the Festival, you must go to every attraction and pick Kris and Noelle to do them. You must record your festival segment to prove it.", 
-  "During Chapter 5's Castle Town segment, you must go out of your way to do 4rd Sanctuary. You do not have to do a full combo. Send a recording of yourself doing 4rd Sanctuary to prove it.", 
-  "You are only allowed to use Kris' regular Flirt act during the Pink fight. MegaFlirt, GigaFlirt, GigaFlirtX, as well as Susie and Ralsei's acts, are all banned. You must record yourself doing the whole fight like this to prove that you did it.", 
-  "During Chapter 5, if you die to Pink at any point, you must immediately stop your playthrough and record yourself singing the entirety of chai's Cutie Mew Mew Magic with lyrics. You may mark this space if you first try Pink. You must prove this one by sending the audio recording OR do a full recording from the moment you use the MysteryKey to the end of the Pink fight to prove you did it deathless.", //130
-  "After fighting Pink, you must trigger her shop dialogue where she warns you about cats and protein. To prove this one, you must take a screenshot of Pink's dialogue.",
-  "During Chapter 5, when Flowery is briefly in your party, you must feed him all of your items. This does not include items in your storage, however you cannot tactically put items in your storage that you wish to preserve before doing this. You must send a screenshot of an empty inventory with Flowery in your party to prove this space.", 
-  "During Chapter 5, you are limited to only use weapons and armor that you obtained during Chapter 4, and cannot pick up any Chapter 5 weapons or armor. You must screenshot your armors and weapons after Chapter 5 to prove that no Chapter 5 armors or weapons have entered your inventory.", 
-  "During Chapter 5, you must end every encounter by tiring every enemy and using Susie's Scythemare spell. You should stream this!",
-  "During Chapter 5, you must complete the entire chapter without picking up a single item or using any items from before Chapter 5. You must prove this one by taking a screenshot of your post-Chapter 4 inventory and then taking a screenshot of your post-Chapter 5 inventory, showing that they match.", //135
-  "During Chapter 5, every time a flower says they're going to use their Omega, you must immediately boot up Undertale to fight Omega Flowey all the way through. This includes if you reload Chapter 5 and encounter the same Omega again. Make sure to stream this one! Flowey's Time Machine is permitted and encouraged.",
-  "During the Flowery fight in Chapter 5, any time the lyrics come on for Flower Man, you must sing along, even if it disorients you from the fight. If you do the Weird Route, you cannot mark this space unless you do a normal playthrough of Chapter 5 and fight Flowery there. There is no need to provide evidence for this one, we'll hear you.",
-  "Once you start Chapter 5, the only sentence you are permitted to say are ones that Flowery has voice lines for. This includes using text chats. If at any point you break this rule, you become illegible for the space. There is no need to provide evidence for this one, we'll hear you."
-};
-const int easyDescLen = sizeof easyDesc / sizeof *easyDesc;
-
-const char* hardDesc[] = {
-  "Beat Undertale: Last Breath at some point during the race and take a screenshot of you in the Last Corridor after killing Sans if you want to prove it... or stream it.", //0
-  "You have to keep the same stupid loadout from the start of the first Chapter. Stream your playthrough if you want to prove it so we can watch you get knocked down by a random gust of wind... or take a picture before Flowery. That works too.", 
-  "You have to complete an FDY fangame fully. Noob Mode is not allowed. Record yourself doing the fight for this to count, or stream it!", 
-  "Stream you beating Sans or take a recording of the whole damn thing to prove it. This has to be in a row.", 
-  "Archipelago works on a randomizer on its own. If you want to prove it, send a picture of the multiworld server log, or stream it!", 
-  "Make sure to stream your gameplay with one of those little on-screen key showing programs on the screen.", //5
-  "You'll have to stream your game for this one to be proved... get ready for a speedwalk! (heh, get it? like... like speedrun... eheh...)", 
-  "This will hurt. Make sure the person you switched with says something so you can prove you did it! And... uh... streaming probably works too, huh?", 
-  "Take a picture of your save after completion to prove this one.", 
+const char* oneStarDesc[] = {
+  "How to prove: Send an image of the art.",
+  "How to prove: Send an image of the art.",
   "That's weird... you could have sworn there was a bingo space here, but it's gone. Looks like you can't complete any bingos where this space would have been.",
-  "Start on a blank canvas and draw the enemies on that canvas. Repeats are included. Make sure to show us your incredible art every time you draw another one!", //10
-  "You have to draw the overworld idle and walking sprites, dark world idle, walking, and battle sprites, and all the portraits. ...I think proving this is pretty easy, just show us. It'll come up naturally in your other screenshots too, I think.",
-  "Make sure to take a picture of your brightness settings! Like, with your phone or something if you can't turn it down through software... if you can mess with your monitor like that...",
+  "How to prove: Send an image of your watch history or stream the videos.",
+  "How to prove: Not necessary... it'll be obvious.",
+  "You better be dicking around and doing nothing. If I see a damn hint of movement, I'll kick your ass.\nHow to prove: Stream the game.",
+  "When you receive it, throw away the Manual instantly, which will take a few tries due to Ralsei trying to give it back to you.\nHow to prove: Send an image of the Manual not being in your inventory after the point when you should've received it.",
+  "You can't take this back or say it was on your bingo board.\nHow to prove: Not necessary... it'll be obvious.",
+  "The character is chosen by a wheel. You can censor your face, don't worry.\nHow to prove: Send an image of yourself.",
+  "this is gonna fuck you over later lol\nHow to prove: Message Sadie.",
+  "You can't take this back or say it was on your bingo board.\nHow to prove: Not necessary... it'll be obvious.",
+  "When naming your podium in Chapter 3, type in 'ASS'.\nHow to prove: Send a screenshot of your podium.",
+  "I'm talking full ugly sob. Piss everyone off.\nHow to prove: Not necessary... it'll be obvious.",
+  "Remember when Toby Fox was in that? That makes it valid for the bingo, right?\nHow to prove: Send an image of your watch history or stream the video.",
+  "You can unmark this space if it gets annoying, don't worry.\nHow to prove: Not necessary... it'll be obvious",
+  "He's sure to appreciate a recording.\nHow to prove: Send a recording of his tale.",
+  "During Cyber City, you can recruit the Hacker by collecting the checkmarks, and he'll show up in Castle Town.\nHow to prove: Send an image of the Hacker with all three checkmarks.",
+  "You can do this either in-game or following a video.\nHow to prove: Not necessary... it'll be obvious.",
+  "During Chapter 1, when Lancer ambushes you for the first time, you must die to his assault at least once before you can get past the encounter.\nHow to prove: Send a recording of you dying to him.",
+  "You may only mark this after completing the fanfiction.\nHow to prove: Not necessary... it'll be obvious.",
+  "Similar to how Susie opens the Dark Fountain in Chapter 4, you must record yourself mimicking the animation in real life. You may censor your face. You must be all in, even doing a full jump and having a weapon.\nHow to prove: Send a recording of you opening the Dark Fountain.",
+  "Throw Kris a little bone for once. I know we all did the Suselle interactions in the Festival and cucked Kris out. Make it up to them.\nHow to prove: Send a recording of the Festival and all the interactions.",
+  "During Chapter 5's Castle Town segment, you must make Susie's outfit for the festival full duck.\nHow to prove: Send an image of Susie wearing the duck outfit.",
+  "Just gotta make sure you're getting some vitamins during the race too.\nHow to prove: Send an image of this.",
+  "Record yourself singing the entirety of chai's Cutie Mew Mew Magic with lyrics.\nHow to prove: Send a recording of this.",
+  "How to prove: Send an image of you in the tutorial.",
+  "How to prove: Send an image of Ralsei's priceless reaction.",
+  "Additional challenge: Don't get smited by Gaster IRL for this.\nHow to prove: Send a recording of this.",
+  "When naming your party in Chapter 1, name yourself the Fuck Squad (or the $!$? Squad).\nHow to prove: Send an image of you choosing this name.",
+  "You have to make the most corny, nose killing, disgusting, moldy Deltarune meme. And somehow get a 50 percent rating.",
+  "How to prove: Send an image of you and your new pal in the call.",
+  "Put something in the microwave for 5 minutes. If the VC can recognize it, you win the space!",
+  "No, you cannot do other things while you do this.\nHow to prove: Stream your suffering (the videos)."
+}; // LIST ^^^ vvv LENGTH VARIABLE
+const int oneStarDescLen = sizeof oneStarDesc / sizeof *oneStarDesc;
+
+const char* twoStarDesc[] = {
+  "No sleep skipping, no text skipping. The introduction is considered finished once you've reached the first save.\nHow to prove: Send a recording of this.",
+  "This includes the Trashy Trio.\nHow to prove: Send an image of the Dojo in Chapter 4 and a screenshot after the Trashy Trio fight in Chapter 5.",
+  "The song is decided via wheel.\nHow to prove: Send a recording of this",
+  "How to prove: Send an image of you beating Black Eggman.",
+  "Complete Night 5 when this is your last space left in your bingo.\nHow to prove: Send an image of your Five Nights at Freddy's main menu screen, including the night your 'continue' button shows.",
+  "How to prove: Send an image of the art.",
+  "You cannot use X or C to skip dialogue here.\nHow to prove: Send a recording of this.",
+  "How to prove: Tell us the theory.",
+  "How to prove: Send an image of the menu showing the hypotheticals.",
+  "At any point during the race, you can challenge someone to a game of UNOTALE and they physically cannot refuse.\nHow to prove: Send an image of all of your victories.",
+  "You may do other spaces while watching.\nHow to prove: Stream this.",
+  "You have to beat Board 1 of Chapter 3 , and every Quiz you do must be 100 percent. If you miss a question, you have to reload the board and start over immediately.\nHow to prove: Send an image of your results for each quiz.",
+  "How to prove: Tell us the theory.",
+  "During the Cyber Field, you can get the Ragger2 by collecting every purple orb leading up to the first Berdly encounter.\nHow to prove: Send an image of the Ragger2 in your inventory.",
+  "How to prove: Send an image of this.",
+  "The only sentence you are permitted to say are ones that Flowery has voice lines for. This includes using text chats. If at any point you break this rule, you become illegible for the space.\nHow to prove: Not necessary... it'll be obvious.",
+  "You must watch both parts of 'If Deltarune was Realistic' by SmashBits. You are not allowed to have it on in the background while you play, pay attention to it.\nHow to prove: Send an image of your watch history.",
+  "How to prove: Sadie said 'RECORD' and she said it in all caps and it scared me a little... :(",
+  "During Cyber City, you can recruit the Electro-Dasher by not hitting too many of them during the car segment, and they'll show up as in Castle Town.\nHow to prove: Send a recording of your car segment.",
+  "When Flowery gives you the chest with infinite currency, you must go out of your way to collect at least 100 F$.\nHow to prove: Send an image of you next to the infinite chest with your menu open.",
+  "At some point during the race, you must construct a tier list of every UT/DR character and get a 50 percent approval rate.",
+  "How to prove: Send a recording of this.",
+  "How to prove: Send a recording of this.",
+  "During Chapter 5's Castle Town segment, you must go out of your way to do 4rd Sanctuary. You do not have to do a full combo.\nHow to prove: Send a recording of this.",
+  "In the C-Rank room, trigger the 1225 secret in the Gacha machine.\nHow to prove: Send an image of the secret.",
+  "The water can be from anywhere. Tap water, bottled water, lake, etc. No internet water. You can, and should, edit the image.",
+  "Toriel will actually call you every five minutes if you wait in the long hallway after she gives you the cell phone without leaving.\nHow to prove: Send an image of Toriel's dialogue in every new phone call.",
+  "Fill up your inventory in either game with whatever you can.\nHow to prove: Send an image of the full inventory.",
+  "How to prove: Send an image of the battle.",
+  "How to prove: Send an image of your results.",
+  "Please don't look it up.\nHow to prove: Send an image of your completed word search.",
+  "You'll have to pet him 55 times.\nHow to prove: Send an image of the game saying you can't reach him anymore.",
+  "...well, I said 'try', at least.\nHow to prove: Send an image of the artifact.",
+  "Remember that you'll have to set your computer's date and time to fight him.\nHow to prove: Send a recording of the fight.",
+  "The number of rounds you have to play is randomly chosen by wheel.\nHow to prove: Stream your gameplay.",
+  "How to prove: Send an image of this.",
+  "You know what it is, but I don't...\nHow to prove: Send an image of this.",
+  "Should be too easy, right?\nHow to prove: Send an image of this.",
+  "Well, if you don't have the Switch version (in which case, do it there), you could always play Undertale Red & Yellow.\nHow to prove: Send an image of the ending.",
+  "Choose someone else to claim any space on your bingo for you. The only catch is that they use Parsec (or some other alternative) to get into your computer to do it, and you can't do anything until they finish or you give up on the space, but they can still do their bingo! Sounds fun, right?\nHow to prove: Get a testimony from the other person.",
+  "You have to get a 50 percent approval rating and Deltarune characters or feats aren't included.",
+  "Use your awesome ahh photoshop skills to design a hypothetical Omega/Photoshop form for your MC."
+}; // LIST ^^^ vvv LENGTH VARIABLE
+const int twoStarDescLen = sizeof twoStarDesc / sizeof *twoStarDesc;
+
+const char* threeStarDesc[] = {
+  "The area is spun by wheel.\nHow to prove: Send an image of your save being at the first save point of that area.",
+  "The area is spun by wheel. You don't need to do the full Genocide route, just exhaust the kill counter in the chosen area.\nHow to prove: Send an image of your save displaying 'Determination.' in that area.",
+  "How to prove: Send an image of him asleep.",
+  "How to prove: Send an image of your recruits page.",
+  "How to prove: Send a recording of every encounter.",
+  "The chapter is spun by wheel.\nHow to prove: Send an image of the credits.",
+  "Jevil is required.\nHow to prove: Stream.",
+  "The area is spun by wheel.\nHow to prove: Send an image of your save being at the first save point of that area.",
+  "This sounds like it'll suck.\nHow to prove: Send an image of every results screen.",
+  "How to prove: Send an image of your save file after completion.",
+  "It's like the Game of Life or something...",
+  "How to prove: Send an image of you beating this.",
+  "You must get a 50 percent approval rating from the VC and have at least five sentences per paragraph.\nHow to prove: Send an image of the essay.",
+  "How to prove: Send an image of your audio settings.",
+  "How to prove: Send an image of your brightness settings.",
+  "Ensure this take has designs for the main characters and chapter antagonists, at least Kris, Susie, Ralsei, Noelle, Berdly, King, Queen, Tenna, the Roaring Knight, Gerson, the Titan, and Flowery, alongside a basic outline of what Chapters 1-5 would look like. You must get a 50 percent approval rating from the VC.",
+  "The animation must be at least 3 minutes long with some sort of story, though the story has no restrictions. You can use any software and have it be of any quality, so long as the average viewer can understand the plot.",
+  "How to prove: Send an image of her corpse.",
+  "You have to use the Deltarune Local Multiplayer Mod and play with a friend via Parsec or other means. The chapter is spun by wheel.",
+  "Dialogue choices may be hard...\nHow to prove: Send an image of the Spamton NEO fight in Japanese.",
+  "You have to write and sing the lyrics to it. The lyrics can be nonsensical as long as they match the song's content and melody.\nHow to prove: Send a recording of the song.",
+  "YOU DO NOT HAVE TO DO THIS PHYSICALLY. Create a HYPOTHETICAL Deltarune restaurant with Deltarune themed foods. You need five appetizers, five mains, five sides, five deserts, and five drinks, and you must get a 50 percent approval rating to claim this space.",
+  "How to prove: Send a recording of this.",
+  "How to prove: Send an image of the Chapter 5 lake scene.",
+  "How to prove: Not necessary... it'll be obvious.",
+  "How to prove: Send an image of the ending.",
+  "Play with Sonic and the Darkened Skies, which replaces Susie with Sonic. You must get to Chapter 4, beating Chapters 1, 2, and 3 along the way.",
+  "You have to use the Team Sonic in Platforming Sections Mod and beat Chapter 5, which surprisingly actually alters the physics.",
+  "In Chapter 3, you must unlock Susiezilla and complete it all the way through at least once.\nHow to prove: Send an image of the results screen.",
+  "Jevil is required.\nHow to prove: Send an image of you receiving the Wrist Protector.",
+  "How to prove: Send images of the results screens.",
+  "You must play Deltarune: Prophecy of Justice, which replaces Kris with Clover. This does not carry over to future chapters as the mod does not support Chapter 2 and beyond.",
+  "You must enter Chapter 3 and get to TV World's Bonus Zone. You do not have to trigger the cutscene with Spamton.\nHow to prove: Send an image of your party standing in the Bonus Zone.",
+  "Beat Chapter 5 with the Aqua over Kris mod.",
+  "Play Chapter 2. Once you unlock Spamton's shop, you must fill your inventory with S. Poisons. You must then enter a fight and use every one in a single encounter.\nHow to prove: Send a recording of this.",
+  "During any board in Chapter 3, you must get an S-Rank as your final result.\nHow to prove: Send an image of your results screen.",
+  "How to prove: Send a recording of this.",
+  "When you fight Tenna, the only thing you are allowed to do to gain score is Kris' ILoveTV. No minigames are permitted, nor usage of Ralsei or Susie's acts.",
+  "During the Rouxls Kaard encounter in Chapter 3, you must at some point trigger the dog button to appear and use it at least once.\nHow to prove: Send an image of the dog button or the resulting cutscene.",
+  "At some point during your race, you must detour into the Roblox fangame Deltarune Connected and get five different people to apologize. For what is irrelevant.\nHow to prove: Send five images of people saying they're sorry.",
+  "During the Desert Board, you must collect all 5 keys.\nHow to prove: Send an image of all 5 keys in your inventory or the bonus achieved from the keys.",
+  "In Queen's Mansion, push the Lancer statue to the table to feed him.\nHow to prove: Send an image of him being well fed.",
+  "How to prove: Send images of each Dogcheck.",
+  "When you get the chance during Chapter 4, you must fight the Mikes.\nHow to prove: Send an image of the end of the Mike fight.",
+  "Beat Deltarune: Friendless.\nHow to prove: Send an image of the ending.",
+  "The enemy is spun by wheel.\nHow to prove: Send an image of the enemy.",
+  "In the Mettaton News segment, try your best to intercept the glass of water.\nHow to prove: Send a recording of this.",
+  "If you take a hit, you must try again.\nHow to prove: Send a recording of this.",
+  "If you fail because of the timer, you cannot claim this space.\nHow to prove: Send a recording of you completing the puzzle.",
+  "How to prove: Send an image of this in your inventory.",
+  "How to prove: Send a recording of this.",
+  "How to prove: Stream this.",
+  "How to prove: Stream this.",
+  "How to prove: Record this.",
+  "I don't know anything about this game.\nHow to prove: Record the main fight.",
+  "How to prove: Record this.",
+  "SHANGHAIVANIA WOOOO",
+  "How to prove: Send a recording of the final fight.",
+  "No, the tutorial fight does not count.\nHow to prove: Send an image of every win.",
+  "You have to mimic the editing style of the videos, the way the characters are voiced, their accents, etc.",
+  "How to prove: Send an image of your ending.",
+  "Beat Dusttrust - Finale's Papyrus Encounter.\nHow to prove: Send a recording of the fight.",
+  "How to prove: Send a recording of the fight.",
+  "That's the multiplayer Undertale game, by the way.\nHow to prove: Send an image with the character.",
+  "I have no idea what's in this mod. Woohoo!\nHow to prove: Send an image of the ending.",
+  "Figure out how to prove it yourself, I don't care.",
+  "Lowest LV, by the way.\nHow to prove: Send a recording of the fight.",
+  "This means the Sans and Alphys endings.\nHow to prove: Send recordings of both fights.",
+  "For an optional challenge, deafen, turn off the lights, and turn on fullscreen! No extra reward.\nHow to prove: Send a recording of the game.",
+  "I'm sure it's not that hard.\nHow to prove: Send a recording of this.",
+  "Honestly, I haven't even played this myself so I'm interested to see what comes out of this.\nHow to prove: Send the list."
+}; // LIST ^^^ vvv LENGTH VARIABLE
+const int threeStarDescLen = sizeof threeStarDesc / sizeof *threeStarDesc;
+
+const char* fourStarDesc[] = {
+  "How to prove: Send a recording of the whole damn thing.",
+  "Find each one of him.\nHow to prove: Send images of him.",
+  "Don't forget a single one.\nHow to prove: Send images of the \"Eggs\".",
+  "Eat the moss whenever you can.\nHow to prove: Send images of the locations and titles.",
+  "During the race, you must choose someone to do a Deltarune Archipelago with, both of you doing the same chapter spun by wheel (but not the full game). The other person does not benefit from doing this with you whatsoever, however they cannot refuse if you ask unless you agree to ask someone else.\nHow to prove: Send a photo of the multiworld logs.",
+  "Jevil and a keyboard overlay are required.\nHow to prove: Stream this with the overlay present on the stream.",
+  "You can't skip encounters, but Spamton NEO isn't necessary because you can't pacify him to begin with.\nHow to prove: Stream your game.",
+  "How to prove: Send an image of each secret boss collection message.",
+  "You have to draw the overworld sprites, dark world sprites, and all the portraits. Special sprites not included, so you really only need to draw like... idles and walking and battle stuff.\nHow to prove: Send images of you in the game.",
+  "How to prove: Record this.",
+  "At some point during your race, you must detour and beat the Roaring Knight in Sonic 3 A.I.R. via the VS. The Roaring Knight mod.\nHow to prove: Send a recording of the fight.",
+  "When fighting Spamton NEO, you must avoid firing a big shot besides when you're forced to in the tutorial.\nHow to prove: Send a recording of the fight.",
+  "During Chapter 1, you must immediately waste TP on Pacify if you can cast it, even if the enemy is not TIRED.\nHow to prove: Send a recording of the fight.",
+  "In the Roblox fangame Deltarune Battles, you must set up a fight with a score of 1000 and beat it. You may only use vanilla party members.\nHow to prove: Send a recording of the fight.",
+  "Dealing damage with Susie's normal attack is banned.\nHow to prove: Send a recording of the fight.",
+  "You must donate to the fountain in Chapter 4 and receive the GoldWidow later on.\nHow to prove: Send an image of you possessing the GoldWidow.",
+  "You must fulfill the requirements for every achievement, netting you 100 percent... if you were on consoles. You may use Deltarune Trophy Edition.",
+  "I don't know anything about this fangame, but it's called 'lost deltarune', so you should play it if you don't get first, because you lost. Alternatively, if you won, this is a free space!\nHow to prove: Send an image of Gaster's bedroom.",
+  "You can change the direction of the shield, by the way.\nHow to prove: Send a recording of the fight.",
+  "In the roguelike fangame Spamton Subplot by SaRlow, you must collect all 36 upgrades. It's like Isaac. You like Binding of Isaac, right?\nHow to prove: Send an image of your completed collection.",
+  "You must no-hit the King fight, and if you take damage, you must reload immediately.\nHow to prove: Send a recording of the fight.",
+  "If at any point Ralsei's HP reaches 0 and he gets downed, you must reload your game immediately.\nHow to prove: Stream the fight.",
+  "During any board in Chapter 3, you must get a T-Rank as your final result.\nHow to prove: Send an image of your results screen.",
+  "How to prove: Send a recording of the fight.",
+  "If they win, they steal your place from you and you automatically place after them. Free space if you're last.\nHow to prove: Get a testimony from the person you fought.",
+  "Well... you kinda have to try NOT to prove this one, hm? You may not lie by omission if someone asks what spaces you have marked.",
+  "How to prove: Send a recording of this.",
+  "During Chapter 5, when Seth and Aqua use the duck attack, you must purposefully go out of your way to die to it, even though it only deals 1 DMG at a time. You may purposefully enter the fight with low HP intending to die to it.\nHow to prove: Send an image of the duck closing in on you once you have 1 HP left.",
+  "That does not include you and you can't tell anyone this is on your bingo. If someone figures it out, tough luck! If, for whatever reason, you can't do it instantly, do it as soon as possible.",
+  "In Chapter 3, you must defeat the Knight without using the ShadowMantle.\nHow to prove: Send a recording starting before the battle showing the lack of having the mantle equipped before going into the fight and completing it.",
+  "How to prove: Send an image of all the equipped items.",
+  "During any board in Chapter 3, you must get a Z-Rank as your final result.\nHow to prove: Send an image of your results screen.",
+  "When fighting Spamton NEO, you must trigger his hard mode by doing the big shot bug.\nHow to prove: Send a recording of this.",
+  "You are only allowed to use Kris' regular Flirt act during the Pink fight. MegaFlirt, GigaFlirt, GigaFlirtX, as well as Susie and Ralsei's acts, are all banned.\nHow to prove: Send a recording of this.",
+  "Throughout your playthrough of Chapter 5, you must collect all the Pink Coins.\nHow to prove: You must show that you have one pink coin left over after buying the three flower items, or show that you used up the last pink coin.",
+  "You must get all the DogDollar items, which appear in every chapter except Chapter 1.",
+  "During the Gerson and Sound of Justice fights, you are only allowed to point your shield up and down. In the Gerson fight, diagonals are not allowed.\nHow to prove: Send a recording of both fights.",
+  "During the Pink fight, you must die to her once to be able to change the bomb settings, and choose meaner bombs.\nHow to prove: Send a recording of this.",
+  "Save editing is allowed.\nHow to prove: Send images of each event.",
+  "This ending can be either True Pacifist, Genocide, or any neutral ending. The ending is decided by a random wheel.",
+  "You may edit your save to have a full inventory of spider items.\nHow to prove: Send a recording of the fight.",
+  "How to prove: Send a recording of the fight.",
+  "How to prove: Send a recording of the fight.",
+  "During enemy attacks, Frisk will constantly be losing HP but will be able to heal by grazing.\nHow to prove: Send a recording of the fight.",
+  "The challenges are spun by a wheel. You don't have to mod the game, you can just save scum. The boss order is as follows: Toriel, Papyrus, Undyne, Mettaton EX, Asgore, Omega Flowey, Asriel, Undyne the Undying, and Sans.\nHow to prove: Stream each boss.",
+  "You may spare or kill her. You are not allowed to be able to see the fight at all while you play, either with a physical blindfold or some other way to blind yourself.\nHow to prove: Provide evidence that you can't see, and send a recording of the fight.",
+  "It's kinda bullshit, I think.\nHow to prove: Send a recording of the fight.",
+  "How to prove: Send a recording of your winning attempt.",
+  "Do something related to Deltatraveler. Literally anything. The only problem is that someone else picks what you do in the game.",
+  "All four phases.\nHow to prove: Stream your winning attempt.",
+  "Become a challenge runner!\nHow to prove: Log every challenge you complete and record it.",
+  "Just to be clear, the CPU is the UTDR character. You can use whoever you want.\nHow to prove: Send a recording of the fight.",
+  "You must entirely ignore the theme for this character. Yeah, good luck...\nHow to prove: Send an image of the build and your results.",
+  "Using any build is fine.\nHow to prove: Send a recording of the whole thing.",
+  "How to prove: Send the mod. If someone else can patch it and see the change, you claim the space!",
+  "I forgot what it was called.\nHow to prove: Send a recording of the fight.",
+  "The block is decided by a wheel, and you can't have cheats on or be in creative. This could get annoying really fast.\nHow to prove: Send an image of the block.",
+  "At any point in the race, send some Undertale art or a screenshot of the game, but edit in an OC that pre-existed prior to the race. If no one notices, you claim the space.",
+  "Fatass. You may use any recipe online or come up with it yourself.\nHow to prove: Send an image of the pie.",
+  "You may only use text chat and can only talk in wingdings. You may not use your voice or use any letters from another font. If Malachy gets this one, he has to talk in Arabic or something, I don't know.",
+  "You can only speak non-English languages during the race."
+}; // LIST ^^^ vvv LENGTH VARIABLE
+const int fourStarDescLen = sizeof fourStarDesc / sizeof *fourStarDesc;
+
+const char* fiveStarDesc[] = {
+  "Someone in the VC of your choosing gets to pick out a mod on GameBanana, either of Undertale or Deltarune, for you to complete. The mod, completion requirements, and proof requirements are dependent on the other person.",
+  "Beat Undertale: Last Breath at some point during the race.\nHow to prove: Send an image of you in the Last Corridor after killing Sans.",
+  "You have to complete an FDY fangame fully. Noob Mode is not allowed.\nHow to prove: Send a recording of yourself doing the fight.",
+  "If this is the last space you need to mark for your bingo, you can mark this one, but you must switch your bingo progress with someone else. For example, if you have 4/5 on your bingo card and this is the last space and you choose to switch with someone who has 2/5 on their bingo card, you may mark this space but you have to unmark 3 other ones on the same bingo, only leaving one other one, so your bingo progress is 2/5 to match theirs. On the other hand, they get to mark two spaces for free so their progress matches 4/5. Each person chooses which of the other person's spaces are marked/unmarked during the progress switch.",
+  "How to prove: Send a recording of you getting cracked Toriel-style because of this fuckass mod.",
+  "How to prove: Send a recording of this.",
   "What? You want me to read their mind and tell you how to prove it? Man, ask them!",
-  "this is gonna fuck you over later lol",
-  "Make sure to stream this!", //15
-  "Make sure to stream this!",
-  "Make sure to stream this!",
-  "Make sure to stream this!",
-  "Make sure you stream getting cracked Toriel-style because of this fuckass mod.",
-  "Make sure you take a picture of the end, you don't want this to be unproveable! Or stream it.", //20
-  "If they win, they steal your place from you and you automatically place after them. Make sure to record this awesome fight.",
-  "Take pictures of all the killer result screens here to prove it! You can stream it, too.",
-  "Make sure to stream your game if you're doing this! You can move your soul if you end up dying to the same encounter three times in a row. You can still shoot and dash and such, though!",
   "you will literally lose the race if you do this so there's not really a point in proving this one",
-  "Make sure to take a picture of your loadout before Flowery!", //25
-  "Every single bingo space on this bingo (except this one) must be completed on its own save file. You may use one save file for two spaces. You must send a screenshot of each one of your save files for this space to count.",
-
-  // CHAPTER ONE
-  "Attacking with Susie and Kris is completely banned. You must record both fights for this to count.",
-  "You must no-hit the King fight, and if you take damage, you must reload immediately. You must record the King fight for this to count.", //28
-
-  // CHAPTER THREE
-  "During any board in Chapter 3, you must get a T-Rank as your final result. You must take a screenshot of your results screen to prove this one.", 
-  "In Chapter 3, you must defeat the Knight without using the ShadowMantle. To prove this one, record yourself before the battle showing having no mantle equipped before going into the fight and completing it. you still need it in your inventory though, lol", //30
-  "In Chapter 3, you must patch the Kaizo Knight mod into your game and complete it. You must take a screenshot of the Kaizo Knight battle to prove this one.", 
-  "When doing the physical challenge of Board 2, you must full combo the whole thing. If you miss a single note, you must immediately reset and try again. In order to prove completion of this space, you must record yourself doing the full combo.",
-  
-  // CHAPTER FOUR
-  "Once you complete Chapter 4, you must install the Ultimate Boss Rush mod and complete Super Mega Ultimate Boss Rush, which is a gauntlet consisting of every miniboss, main boss, and secret boss. You must screenshot yourself being at the end of the boss rush for this space to count.",
-  
-  // CHAPTER FIVE
-  "You must install and use Determination Flowery during the Flowery fight. If you do the Weird Route, you are illegible for this space as you do not fight Flowery, unless you go out of your way to do a normal Chapter 5 completion as well. Take a screenshot of Determination Flowery to prove",
-  "During Chapter 5, you must complete the entire Flowery fight without charging up the soul to do a dash. This includes the tutorial, where you will have to tank four of the blue bamboo sticks. You must prove this one by recording your fight.", //35
-  "During Chapter 5, when Seth and Aqua use the duck attack, you must purposefully go out of your way to die to it, even though it only deals 1 DMG at a time. You may purposefully enter the fight with low HP intending to die to it. Take a screenshot of the duck closing in on you once you have 1 HP left to prove you completed this space."
-};
-const int hardDescLen = sizeof hardDesc / sizeof *hardDesc;
+  "How to prove: Send an image of the settings being active.",
+  "In Chapter 3, you must patch the Kaizo Knight mod into your game and complete it.\nHow to prove: Send an image of the Kaizo Knight battle.",
+  "For example, every Deltarune space must be completed starting from Chapter 1, even if the challenge is in Chapter 4 or 5.",
+  "You must complete Deltarune Chapter 4 running the DELTARUNE Chaos Randomizer mod, a mod which randomizes every encounter so every enemy is random, including bosses.",
+  "How to prove: Make sure we know that you are doing this.",
+  "The boss will be spun by wheel.\nHow to prove: Send a recording of the fight.",
+  "You must install and use Determination Flowery and beat the Flowery fight\nHow to prove: Send a recording of the fight.",
+  "During Chapter 5, you must complete the entire Flowery fight without charging up the soul to do a dash. This includes the tutorial, where you will have to tank four of the blue bamboo sticks.\nHow to prove: Send a recording of the fight.",
+  "You must install the Ultimate Boss Rush mod and complete Super Mega Ultimate Boss Rush, which is a gauntlet consisting of every miniboss, main boss, and secret boss. You do this in Chapter 4, in case you’re confused.\nHow to prove: Send an image of yourself being at the end of the boss rush.",
+  "You have to beat Jevil with the KAIZO!Jevil mod patched into your game.\nHow to prove: Send a recording of the fight.",
+  "i think this will be pretty fucking obvious cause you have to communicate. do that shit verbally i guess.",
+  "You have to beat the Extreme Demon level 'A Flower's Dream' on Geometry Dash.  Practice mode is allowed.\nHow to prove: Send an image of your 100 percent.",
+  "How to prove: Record this.",
+  "you will lose if you do this",
+  "How to prove: Send the account.",
+  "You can take hits in the dungeon segment leading up to ERAM.\nHow to prove: Send a recording of the fight.",
+  "sam made me think of three more 5 star spapces and this is what i came up with  so if you get this its his fault\nHow to prove: Send a recording of this.",
+  "That means LV 1, stick and bandage, no items.",
+  "As long as you have this space marked, you are not allowed to do any spaces unless they are specifically allowed to you by someone else. However, people are not allowed to keep you trapped in last place - you may choose to do a space on your own if you are in last.",
+  "Saveless Undertale is a challenge that even gets commented on in the neutral ending.\nHow to prove: Send an image of Sans making that comment."
+}; // LIST ^^^ vvv LENGTH VARIABLE
+const int fiveStarDescLen = sizeof fiveStarDesc / sizeof *fiveStarDesc;

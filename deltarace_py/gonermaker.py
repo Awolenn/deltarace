@@ -7,56 +7,56 @@ import vessel
 # [ YES, HE SCRAWLS HIS NAME IN THE MARGINS OF HIS NOTES. HE NAMES PROGRAMMING VARIABLES AFTER HIM. ]
 # the list that holds onto the final product. he won't come in until later.
 malachy = []
+# stupid document later
+malachy2 = []
 # --- VARIABLES END --- #
 
 # --- FUNCTIONS START --- #
 
-def easyChoice():
-    """Selects a random integer that can be carded in the easyNames list.
-
-    Returns:
-        int: A random integer that can be carded in the easyNames list.
-    """
-    return random.randint(0, len(vessel.easyNames)-1)
-
-def hardChoice():
-    """Selects a random integer that can be carded in the hardNames list.
-
-    Returns:
-        int: A random integer that can be carded in the hardNames list.
-    """
-    return random.randint(0, len(vessel.hardNames)-1)
-
-def cardAdder(choice, boardList):
+def cardAdder(boardList):
     """Assists in the act of picking cards for the bingo board by disallowing duplicates.
 
     Really only intended to be used in finalChoice(), if it breaks outside of that... I don't care.
 
     Args:
-        choice (str): The choice for that area. Needs to be "hard", "free", or "easy", others won't work as intended.
+        star (str): The choice for that area. Needs to be within 50, others won't work as intended.
         boardList ([]): A (preferably) empty list that the cards get added to.
     """
-    if choice == "hard":
-        newCard = hardChoice()
-    elif choice == "free":
-        newCard = "FREE SPACE"
-    elif choice == "easy":
-        newCard = easyChoice()
-    else:
-        print("you fucked this up and entered it wrong")
+    global malachy2
+
+    star = random.randint(1, 50)
+    if star >= 1 and star <= 16:
+        malachy3 = 1
+        newCard = random.randint(0, len(vessel.oneStarNames)-1)
+    elif star > 16 and star <= 29:
+        malachy3 = 2
+        newCard = random.randint(0, len(vessel.twoStarNames)-1)
+    elif star > 29 and star <= 39:
+        malachy3 = 3
+        newCard = random.randint(0, len(vessel.threeStarNames)-1)
+    elif star > 39 and star <= 45:
+        malachy3 = 4
+        newCard = random.randint(0, len(vessel.fourStarNames)-1)
+    elif star > 45 and star <= 50:
+        malachy3 = 5
+        newCard = random.randint(0, len(vessel.fiveStarNames)-1)
     while newCard in boardList:
         print(newCard, "is not used because it is already in the list.")
         print("rerolling!")
-        if choice == "hard":
-            newCard = hardChoice()
-        elif choice == "free":
-            newCard = "FREE SPACE"
-        elif choice == "easy":
-            newCard = easyChoice()
-        else:
-            print("you fucked this up and entered it wrong")
+        if star >= 1 and star <= 16:
+            newCard = random.randint(0, len(vessel.oneStarNames)-1)
+        elif star > 16 and star <= 29:
+            newCard = random.randint(0, len(vessel.twoStarNames)-1)
+        elif star > 29 and star <= 39:
+            newCard = random.randint(0, len(vessel.threeStarNames)-1)
+        elif star > 39 and star <= 45:
+            newCard = random.randint(0, len(vessel.fourStarNames)-1)
+        elif star > 45 and star <= 50:
+            newCard = random.randint(0, len(vessel.fiveStarNames)-1)
     print("appending", newCard, "to list.")
+    malachy2.append(malachy3)
     boardList.append(newCard)
+    print(malachy2)
     print(boardList)
 
 def finalChoice():
@@ -70,31 +70,42 @@ def finalChoice():
     board = []
 
     for card in range(25):
-        if card == 4 or card == 6 or card == 10 or card == 18 or card == 22:
-            cardAdder("hard", board)
-        elif card == 12:
-            cardAdder("free", board)
+        if card == 12:
+            malachy2.append(0)
+            board.append("FREE SPACE")
         else:
-            cardAdder("easy", board)
+            cardAdder(board)
     return board
 
 # it's malachy. i told you he'd be back! he's awkwardly placed but whatever parts of my code have to suck or else i'll think i'm the best.
 malachy = finalChoice()
 
 def mikeTheBoard(card):
-    if card == 4 or card == 6 or card == 10 or card == 18 or card == 22:
-        return vessel.hardNames[malachy[card]]
-    if card == 12:
+    if malachy2[card] == 0:
         return "FREE SPACE"
-    else:
-        return vessel.easyNames[malachy[card]]
+    if malachy2[card] == 1:
+        return vessel.oneStarNames[malachy[card]]
+    if malachy2[card] == 2:
+        return vessel.twoStarNames[malachy[card]]
+    if malachy2[card] == 3:
+        return vessel.threeStarNames[malachy[card]]
+    if malachy2[card] == 4:
+        return vessel.fourStarNames[malachy[card]]
+    if malachy2[card] == 5:
+        return vessel.fiveStarNames[malachy[card]]
 
 def okMikeCanYouDescribeItForMe(card):
-    if card == 4 or card == 6 or card == 10 or card == 18 or card == 22:
-        return vessel.hardDesc[malachy[card]]
-    if card == 12:
+    if malachy2[card] == 0:
         return "FREE SPACE"
-    else:
-        return vessel.easyDesc[malachy[card]]
+    if malachy2[card] == 1:
+        return vessel.oneStarDesc[malachy[card]]
+    if malachy2[card] == 2:
+        return vessel.twoStarDesc[malachy[card]]
+    if malachy2[card] == 3:
+        return vessel.threeStarDesc[malachy[card]]
+    if malachy2[card] == 4:
+        return vessel.fourStarDesc[malachy[card]]
+    if malachy2[card] == 5:
+        return vessel.fiveStarDesc[malachy[card]]
 
 # --- FUNCTIONS END --- #
